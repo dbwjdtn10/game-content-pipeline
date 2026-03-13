@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GameMonster",
+  "description": "Schema for fantasy RPG game monsters",
+  "type": "object",
+  "required": [
+    "name",
+    "type",
+    "level",
+    "region",
+    "stats",
+    "skills",
+    "drop_items",
+    "respawn_time_seconds",
+    "description"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^mob_[a-z0-9_]+$",
+      "description": "Unique monster identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "Monster name in Korean"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["normal", "elite", "boss"],
+      "description": "Monster difficulty classification"
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99,
+      "description": "Monster level"
+    },
+    "region": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Region where the monster appears"
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "hp": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Hit points"
+        },
+        "atk": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Attack power"
+        },
+        "def": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Defense"
+        },
+        "speed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Speed stat"
+        }
+      },
+      "required": ["hp", "atk", "def", "speed"],
+      "additionalProperties": false
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Skill name in Korean"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["active", "passive", "buff", "debuff"],
+            "description": "Skill type"
+          },
+          "damage_multiplier": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Damage multiplier relative to base ATK"
+          },
+          "cooldown_seconds": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Cooldown in seconds"
+          },
+          "description": {
+            "type": "string",
+            "description": "Skill effect description"
+          }
+        },
+        "required": ["name", "type", "damage_multiplier", "cooldown_seconds", "description"]
+      },
+      "minItems": 1,
+      "description": "List of monster skills"
+    },
+    "drop_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "description": "Reference to item ID"
+          },
+          "item_name": {
+            "type": "string",
+            "description": "Item name for readability"
+          },
+          "drop_rate": {
+            "type": "number",
+            "minimum": 0.0001,
+            "maximum": 1.0,
+            "description": "Drop probability (0-1)"
+          }
+        },
+        "required": ["item_id", "item_name", "drop_rate"]
+      },
+      "description": "Items dropped by this monster"
+    },
+    "respawn_time_seconds": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Time in seconds before the monster respawns"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "Monster description in Korean"
+    }
+  },
+  "additionalProperties": false
+}

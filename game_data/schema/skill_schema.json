@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GameSkill",
+  "description": "Schema for fantasy RPG game skills",
+  "type": "object",
+  "required": [
+    "name",
+    "type",
+    "element",
+    "damage_base",
+    "cooldown_seconds",
+    "mp_cost",
+    "description",
+    "level_requirement"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^skill_[a-z0-9_]+$",
+      "description": "Unique skill identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "Skill name in Korean"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["active", "passive", "buff", "debuff"],
+      "description": "Skill category"
+    },
+    "element": {
+      "type": "string",
+      "enum": ["fire", "ice", "lightning", "dark", "holy", "none"],
+      "description": "Elemental attribute"
+    },
+    "damage_base": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Base damage value before scaling"
+    },
+    "cooldown_seconds": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Cooldown time in seconds"
+    },
+    "mp_cost": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Mana points consumed on use"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 300,
+      "description": "Skill description in Korean"
+    },
+    "level_requirement": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99,
+      "description": "Minimum character level to learn this skill"
+    },
+    "max_rank": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "Maximum skill rank"
+    },
+    "scaling": {
+      "type": "object",
+      "properties": {
+        "atk_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "description": "ATK scaling ratio"
+        },
+        "per_rank_bonus": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Additional damage per rank"
+        }
+      },
+      "description": "Damage scaling parameters"
+    }
+  },
+  "additionalProperties": false
+}

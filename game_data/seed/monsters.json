@@ -1,0 +1,552 @@
+[
+  {
+    "id": "mob_green_slime",
+    "name": "초록 슬라임",
+    "type": "normal",
+    "level": 1,
+    "region": "푸른 초원",
+    "stats": { "hp": 80, "atk": 5, "def": 2, "speed": 3 },
+    "skills": [
+      {
+        "name": "몸통 박치기",
+        "type": "active",
+        "damage_multiplier": 1.0,
+        "cooldown_seconds": 0,
+        "description": "점성이 있는 몸체로 돌진하여 부딪힌다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_minor_heal_potion", "item_name": "하급 치유의 물약", "drop_rate": 0.3 }
+    ],
+    "respawn_time_seconds": 15,
+    "description": "푸른 초원 어디서나 볼 수 있는 가장 흔한 마물. 반투명한 초록색 몸체를 가지고 있으며, 위협적이지는 않지만 초보 모험가에겐 좋은 수련 상대가 된다."
+  },
+  {
+    "id": "mob_wild_boar",
+    "name": "야생 멧돼지",
+    "type": "normal",
+    "level": 5,
+    "region": "푸른 초원",
+    "stats": { "hp": 250, "atk": 18, "def": 10, "speed": 8 },
+    "skills": [
+      {
+        "name": "돌진",
+        "type": "active",
+        "damage_multiplier": 1.5,
+        "cooldown_seconds": 8,
+        "description": "전방으로 빠르게 돌진하여 들이받는다. 맞은 대상은 뒤로 밀려난다."
+      },
+      {
+        "name": "이빨 갈기",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 20,
+        "description": "분노하여 이빨을 갈며 10초간 공격력이 20% 증가한다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_leather_vest", "item_name": "가죽 조끼", "drop_rate": 0.05 },
+      { "item_id": "item_minor_heal_potion", "item_name": "하급 치유의 물약", "drop_rate": 0.2 }
+    ],
+    "respawn_time_seconds": 30,
+    "description": "초원 외곽에 서식하는 거대한 멧돼지. 평소에는 온순하지만 자극을 받으면 강력한 돌진 공격을 시도한다. 날카로운 엄니에 주의해야 한다."
+  },
+  {
+    "id": "mob_giant_wolf",
+    "name": "거대 늑대",
+    "type": "elite",
+    "level": 8,
+    "region": "푸른 초원",
+    "stats": { "hp": 600, "atk": 30, "def": 15, "speed": 18 },
+    "skills": [
+      {
+        "name": "맹렬한 물기",
+        "type": "active",
+        "damage_multiplier": 1.8,
+        "cooldown_seconds": 6,
+        "description": "강력한 턱으로 대상을 물어뜯는다. 출혈 효과를 부여한다."
+      },
+      {
+        "name": "울부짖음",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 30,
+        "description": "늑대의 울부짖음으로 주변 아군의 공격 속도를 15% 증가시킨다."
+      },
+      {
+        "name": "급소 노리기",
+        "type": "active",
+        "damage_multiplier": 2.5,
+        "cooldown_seconds": 15,
+        "description": "대상의 급소를 노려 치명적인 일격을 가한다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_wolf_fang_necklace", "item_name": "늑대 송곳니 목걸이", "drop_rate": 0.08 },
+      { "item_id": "item_minor_heal_potion", "item_name": "하급 치유의 물약", "drop_rate": 0.4 }
+    ],
+    "respawn_time_seconds": 120,
+    "description": "일반 늑대의 두 배 이상 되는 거대한 체구를 자랑하는 초원의 포식자. 무리의 우두머리로서 뛰어난 전투 본능을 지니고 있으며, 초보 모험가에게는 큰 위협이 된다."
+  },
+  {
+    "id": "mob_treant",
+    "name": "나무 정령",
+    "type": "normal",
+    "level": 15,
+    "region": "속삭이는 숲",
+    "stats": { "hp": 800, "atk": 35, "def": 30, "speed": 5 },
+    "skills": [
+      {
+        "name": "뿌리 올리기",
+        "type": "active",
+        "damage_multiplier": 1.2,
+        "cooldown_seconds": 10,
+        "description": "땅속에서 거대한 뿌리를 솟아오르게 하여 적을 공격한다. 2초간 이동불가."
+      },
+      {
+        "name": "자연의 치유",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 25,
+        "description": "자연의 힘으로 자신의 HP를 최대 HP의 10% 회복한다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_mana_crystal_ring", "item_name": "마나 수정 반지", "drop_rate": 0.03 },
+      { "item_id": "item_mid_heal_potion", "item_name": "중급 치유의 물약", "drop_rate": 0.15 }
+    ],
+    "respawn_time_seconds": 45,
+    "description": "속삭이는 숲에 서식하는 나무 형태의 정령. 숲을 침범하는 자들에게 적대적이나, 숲을 존중하는 이에게는 길을 내어준다고 전해진다."
+  },
+  {
+    "id": "mob_venom_spider",
+    "name": "맹독 거미",
+    "type": "normal",
+    "level": 18,
+    "region": "속삭이는 숲",
+    "stats": { "hp": 550, "atk": 42, "def": 18, "speed": 22 },
+    "skills": [
+      {
+        "name": "독액 분사",
+        "type": "active",
+        "damage_multiplier": 1.3,
+        "cooldown_seconds": 8,
+        "description": "맹독을 뿜어 적에게 중독 상태를 부여한다. 8초간 초당 5의 피해."
+      },
+      {
+        "name": "거미줄 포획",
+        "type": "debuff",
+        "damage_multiplier": 0.5,
+        "cooldown_seconds": 15,
+        "description": "끈적이는 거미줄을 발사하여 대상의 이동 속도를 50% 감소시킨다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_mid_heal_potion", "item_name": "중급 치유의 물약", "drop_rate": 0.2 }
+    ],
+    "respawn_time_seconds": 35,
+    "description": "숲의 어두운 구석에 거대한 거미줄을 치고 사냥감을 기다리는 독거미. 날카로운 독니에서 분비되는 독은 성인 남성도 수 시간 내에 마비시킬 수 있다."
+  },
+  {
+    "id": "mob_forest_golem",
+    "name": "숲의 골렘",
+    "type": "boss",
+    "level": 22,
+    "region": "속삭이는 숲",
+    "stats": { "hp": 8000, "atk": 65, "def": 50, "speed": 6 },
+    "skills": [
+      {
+        "name": "대지의 분쇄",
+        "type": "active",
+        "damage_multiplier": 2.0,
+        "cooldown_seconds": 12,
+        "description": "거대한 팔을 내려쳐 대지를 분쇄한다. 주변 적 전체에게 피해를 입힌다."
+      },
+      {
+        "name": "자연의 방벽",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 40,
+        "description": "나무와 바위로 이루어진 방벽을 세워 15초간 받는 피해를 40% 감소시킨다."
+      },
+      {
+        "name": "뿌리 감옥",
+        "type": "debuff",
+        "damage_multiplier": 1.0,
+        "cooldown_seconds": 20,
+        "description": "대상을 거대한 뿌리로 감싸 4초간 속박하고 지속 피해를 입힌다."
+      },
+      {
+        "name": "재생",
+        "type": "passive",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 0,
+        "description": "전투 중 5초마다 최대 HP의 2%를 회복한다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_forest_guardian_bow", "item_name": "숲 수호자의 활", "drop_rate": 0.05 },
+      { "item_id": "item_mana_crystal_ring", "item_name": "마나 수정 반지", "drop_rate": 0.15 },
+      { "item_id": "item_mid_heal_potion", "item_name": "중급 치유의 물약", "drop_rate": 0.8 }
+    ],
+    "respawn_time_seconds": 3600,
+    "description": "속삭이는 숲의 최심부를 수호하는 고대 골렘. 숲 그 자체의 의지가 구현된 존재로, 수백 년간 세계수를 지켜왔다. 거대한 체구와 압도적인 방어력을 지녔으며, 숲의 침입자를 결코 용서하지 않는다."
+  },
+  {
+    "id": "mob_fire_imp",
+    "name": "화염 임프",
+    "type": "normal",
+    "level": 28,
+    "region": "불의 산맥",
+    "stats": { "hp": 900, "atk": 58, "def": 22, "speed": 20 },
+    "skills": [
+      {
+        "name": "화염구",
+        "type": "active",
+        "damage_multiplier": 1.4,
+        "cooldown_seconds": 5,
+        "description": "작은 화염구를 발사하여 적에게 화염 피해를 입힌다."
+      },
+      {
+        "name": "자폭",
+        "type": "active",
+        "damage_multiplier": 3.0,
+        "cooldown_seconds": 0,
+        "description": "HP가 10% 이하일 때 자폭하여 주변 적에게 대량의 화염 피해를 입힌다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_elixir_of_fury", "item_name": "분노의 영약", "drop_rate": 0.05 }
+    ],
+    "respawn_time_seconds": 25,
+    "description": "불의 산맥 곳곳에 서식하는 작은 화염 악마. 장난기가 많고 공격적이며, 무리 지어 다니는 경우가 많다. 체구는 작지만 내뿜는 화염은 매우 뜨겁다."
+  },
+  {
+    "id": "mob_lava_drake",
+    "name": "용암 드레이크",
+    "type": "elite",
+    "level": 32,
+    "region": "불의 산맥",
+    "stats": { "hp": 3500, "atk": 85, "def": 45, "speed": 14 },
+    "skills": [
+      {
+        "name": "화염 브레스",
+        "type": "active",
+        "damage_multiplier": 2.2,
+        "cooldown_seconds": 15,
+        "description": "전방 부채꼴 범위에 강력한 화염을 내뿜는다."
+      },
+      {
+        "name": "용암 웅덩이",
+        "type": "active",
+        "damage_multiplier": 0.8,
+        "cooldown_seconds": 20,
+        "description": "지면에 용암 웅덩이를 생성하여 10초간 범위 내 적에게 지속 피해를 입힌다."
+      },
+      {
+        "name": "비늘 경화",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 30,
+        "description": "비늘을 단단하게 세워 12초간 방어력을 35% 증가시킨다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_flame_blade", "item_name": "화염의 칼날", "drop_rate": 0.03 },
+      { "item_id": "item_volcanic_plate", "item_name": "화산암 판금갑", "drop_rate": 0.02 }
+    ],
+    "respawn_time_seconds": 300,
+    "description": "용의 혈통을 이어받은 거대한 도마뱀형 마물. 비행 능력은 퇴화했지만 강력한 화염 브레스를 내뿜을 수 있다. 용암 지대에서 서식하며 영역 의식이 매우 강하다."
+  },
+  {
+    "id": "mob_flame_guardian",
+    "name": "화염의 수호자",
+    "type": "boss",
+    "level": 35,
+    "region": "불의 산맥",
+    "stats": { "hp": 15000, "atk": 95, "def": 55, "speed": 10 },
+    "skills": [
+      {
+        "name": "화염 폭풍",
+        "type": "active",
+        "damage_multiplier": 2.5,
+        "cooldown_seconds": 20,
+        "description": "주변 전체에 화염 폭풍을 일으킨다. 모든 적에게 대량의 화염 피해."
+      },
+      {
+        "name": "용암 분출",
+        "type": "active",
+        "damage_multiplier": 1.8,
+        "cooldown_seconds": 12,
+        "description": "지면에서 용암을 분출시켜 대상 위치에 피해를 입힌다."
+      },
+      {
+        "name": "화염 갑옷",
+        "type": "passive",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 0,
+        "description": "몸을 감싼 화염으로 근접 공격자에게 반사 피해를 입힌다."
+      },
+      {
+        "name": "분노의 화신",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 60,
+        "description": "HP가 30% 이하일 때 발동. 공격력 50% 증가, 공격 속도 30% 증가."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_flame_blade", "item_name": "화염의 칼날", "drop_rate": 0.12 },
+      { "item_id": "item_volcanic_plate", "item_name": "화산암 판금갑", "drop_rate": 0.08 },
+      { "item_id": "item_elixir_of_fury", "item_name": "분노의 영약", "drop_rate": 0.5 }
+    ],
+    "respawn_time_seconds": 7200,
+    "description": "불의 산맥의 화산 분화구를 지키는 화염 정령의 왕. 태초에 화산이 생성될 때 함께 태어났다고 전해지며, 화산 그 자체의 분노를 대변하는 존재이다. 다가오는 자 모두를 잿더미로 만들어 버린다."
+  },
+  {
+    "id": "mob_ice_wraith",
+    "name": "얼음 망령",
+    "type": "normal",
+    "level": 38,
+    "region": "얼음 동굴",
+    "stats": { "hp": 1200, "atk": 70, "def": 28, "speed": 16 },
+    "skills": [
+      {
+        "name": "냉기의 손길",
+        "type": "active",
+        "damage_multiplier": 1.5,
+        "cooldown_seconds": 7,
+        "description": "차가운 손으로 적을 움켜쥐어 얼음 피해를 입히고 이동 속도를 감소시킨다."
+      },
+      {
+        "name": "비실체화",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 25,
+        "description": "8초간 비실체 상태가 되어 물리 피해를 50% 감소시킨다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_frost_pendant", "item_name": "서리꽃 목걸이", "drop_rate": 0.02 },
+      { "item_id": "item_supreme_heal_potion", "item_name": "최상급 치유의 물약", "drop_rate": 0.1 }
+    ],
+    "respawn_time_seconds": 40,
+    "description": "얼음 동굴에서 떠도는 냉기의 망령. 동굴에서 목숨을 잃은 탐험가들의 원혼이 극한의 냉기에 의해 변질된 존재이다. 그들의 한탄이 동굴 깊은 곳에서 메아리친다."
+  },
+  {
+    "id": "mob_frost_giant",
+    "name": "서리 거인",
+    "type": "boss",
+    "level": 45,
+    "region": "얼음 동굴",
+    "stats": { "hp": 25000, "atk": 120, "def": 70, "speed": 8 },
+    "skills": [
+      {
+        "name": "빙결의 일격",
+        "type": "active",
+        "damage_multiplier": 2.8,
+        "cooldown_seconds": 15,
+        "description": "거대한 얼음 망치로 내려쳐 대상을 동결시키고 주변에 빙결 파편 피해를 입힌다."
+      },
+      {
+        "name": "눈보라",
+        "type": "active",
+        "damage_multiplier": 1.5,
+        "cooldown_seconds": 25,
+        "description": "격렬한 눈보라를 일으켜 전장 전체에 지속 얼음 피해를 입히고 시야를 방해한다."
+      },
+      {
+        "name": "빙하의 포효",
+        "type": "debuff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 35,
+        "description": "공포의 포효로 모든 적의 공격력과 방어력을 15% 감소시킨다."
+      },
+      {
+        "name": "영구동토",
+        "type": "passive",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 0,
+        "description": "주변 지면을 얼려 적의 이동 속도를 항상 20% 감소시킨다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_glacial_warhammer", "item_name": "빙하의 전투망치", "drop_rate": 0.06 },
+      { "item_id": "item_frost_pendant", "item_name": "서리꽃 목걸이", "drop_rate": 0.1 },
+      { "item_id": "item_supreme_heal_potion", "item_name": "최상급 치유의 물약", "drop_rate": 0.6 }
+    ],
+    "respawn_time_seconds": 10800,
+    "description": "얼음 동굴의 최심부에서 만년빙과 함께 잠들어 있던 태고의 거인. 깨어나면 주변의 모든 것을 얼려버리는 절대적인 냉기를 내뿜는다. 그의 전투망치 한 방은 대지를 가를 수 있다."
+  },
+  {
+    "id": "mob_shadow_knight",
+    "name": "암흑 기사",
+    "type": "elite",
+    "level": 50,
+    "region": "어둠의 성",
+    "stats": { "hp": 6000, "atk": 105, "def": 65, "speed": 15 },
+    "skills": [
+      {
+        "name": "암흑 참격",
+        "type": "active",
+        "damage_multiplier": 2.0,
+        "cooldown_seconds": 8,
+        "description": "암흑 기운을 실은 참격을 날린다. 맞은 대상의 회복량을 30% 감소시킨다."
+      },
+      {
+        "name": "그림자 이동",
+        "type": "active",
+        "damage_multiplier": 1.5,
+        "cooldown_seconds": 12,
+        "description": "그림자 속으로 사라졌다가 대상 뒤에서 나타나 기습 공격을 가한다."
+      },
+      {
+        "name": "암흑의 결계",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 30,
+        "description": "암흑 결계를 펼쳐 10초간 마법 피해를 60% 감소시킨다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_dark_soul_gem", "item_name": "어둠의 혼석", "drop_rate": 0.04 },
+      { "item_id": "item_shadow_cloak", "item_name": "그림자 망토", "drop_rate": 0.02 }
+    ],
+    "respawn_time_seconds": 180,
+    "description": "어둠의 군주 벨카자르에게 영혼을 바치고 불멸의 전사가 된 타락한 기사들. 생전의 뛰어난 검술에 암흑 마력까지 더해져 매우 위험한 적이다. 그들의 눈에서는 핏빛 광채가 흐른다."
+  },
+  {
+    "id": "mob_doom_lich",
+    "name": "멸망의 리치",
+    "type": "elite",
+    "level": 55,
+    "region": "어둠의 성",
+    "stats": { "hp": 5000, "atk": 130, "def": 40, "speed": 12 },
+    "skills": [
+      {
+        "name": "죽음의 광선",
+        "type": "active",
+        "damage_multiplier": 2.5,
+        "cooldown_seconds": 10,
+        "description": "집중된 사령 에너지를 광선으로 발사한다. 단일 대상에게 극대 피해."
+      },
+      {
+        "name": "언데드 소환",
+        "type": "active",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 30,
+        "description": "3체의 해골 전사를 소환한다. 소환수는 30초간 유지된다."
+      },
+      {
+        "name": "영혼 흡수",
+        "type": "active",
+        "damage_multiplier": 1.8,
+        "cooldown_seconds": 18,
+        "description": "대상의 영혼에서 생명력을 빨아들인다. 가한 피해의 50%만큼 HP를 회복한다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_dark_soul_gem", "item_name": "어둠의 혼석", "drop_rate": 0.06 },
+      { "item_id": "item_supreme_heal_potion", "item_name": "최상급 치유의 물약", "drop_rate": 0.3 }
+    ],
+    "respawn_time_seconds": 300,
+    "description": "죽음조차 초월한 고대 마법사의 잔해. 육체는 이미 부패하였으나 강력한 사령술로 스스로를 유지하고 있다. 수백 년간 축적한 마법 지식은 살아있는 그 어떤 마법사보다 방대하다."
+  },
+  {
+    "id": "mob_dragon_of_ruin",
+    "name": "파멸의 용",
+    "type": "boss",
+    "level": 60,
+    "region": "어둠의 성",
+    "stats": { "hp": 50000, "atk": 180, "def": 90, "speed": 13 },
+    "skills": [
+      {
+        "name": "암흑 브레스",
+        "type": "active",
+        "damage_multiplier": 3.0,
+        "cooldown_seconds": 20,
+        "description": "암흑 에너지를 농축한 브레스를 내뿜어 전방의 모든 것을 소멸시킨다."
+      },
+      {
+        "name": "파멸의 날갯짓",
+        "type": "active",
+        "damage_multiplier": 2.0,
+        "cooldown_seconds": 15,
+        "description": "거대한 날개를 휘둘러 충격파를 일으킨다. 모든 적을 밀어내고 피해를 입힌다."
+      },
+      {
+        "name": "용의 위엄",
+        "type": "debuff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 45,
+        "description": "압도적인 위압감으로 모든 적의 모든 능력치를 20% 감소시킨다."
+      },
+      {
+        "name": "부활의 비늘",
+        "type": "passive",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 0,
+        "description": "전투 중 1회, HP가 0이 되면 HP 30%로 부활한다."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_sword_of_dawn", "item_name": "여명의 성검", "drop_rate": 0.01 },
+      { "item_id": "item_shadow_cloak", "item_name": "그림자 망토", "drop_rate": 0.05 },
+      { "item_id": "item_dark_soul_gem", "item_name": "어둠의 혼석", "drop_rate": 0.2 }
+    ],
+    "respawn_time_seconds": 86400,
+    "description": "어둠의 군주 벨카자르가 부활시킨 고대의 용. 한때 대륙을 공포로 물들였던 전설의 존재이며, 암흑 마력에 의해 더욱 강력해졌다. 성의 최상층에서 벨카자르를 호위하고 있다."
+  },
+  {
+    "id": "mob_dark_lord_velkazar",
+    "name": "어둠의 군주 벨카자르",
+    "type": "boss",
+    "level": 70,
+    "region": "어둠의 성",
+    "stats": { "hp": 100000, "atk": 250, "def": 120, "speed": 18 },
+    "skills": [
+      {
+        "name": "종말의 선고",
+        "type": "active",
+        "damage_multiplier": 4.0,
+        "cooldown_seconds": 30,
+        "description": "대상에게 종말을 선고하여 5초 후 즉사 판정을 내린다. 판정 전에 일정 피해를 가하면 해제 가능."
+      },
+      {
+        "name": "암흑 차원문",
+        "type": "active",
+        "damage_multiplier": 2.5,
+        "cooldown_seconds": 25,
+        "description": "암흑 차원의 문을 열어 차원의 에너지가 쏟아져 나온다. 광역 피해."
+      },
+      {
+        "name": "영혼 지배",
+        "type": "debuff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 40,
+        "description": "파티원 1명을 10초간 지배하여 아군을 공격하게 만든다."
+      },
+      {
+        "name": "불멸의 어둠",
+        "type": "passive",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 0,
+        "description": "HP가 50% 이하일 때 어둠의 힘이 폭주하여 모든 능력치가 30% 증가한다."
+      },
+      {
+        "name": "어둠의 세례",
+        "type": "active",
+        "damage_multiplier": 3.5,
+        "cooldown_seconds": 35,
+        "description": "전장 전체에 암흑 에너지를 퍼뜨린다. 회피 불가, 모든 적에게 대량 피해 및 회복 불가 디버프."
+      }
+    ],
+    "drop_items": [
+      { "item_id": "item_crown_of_eternity", "item_name": "영원의 왕관", "drop_rate": 0.02 },
+      { "item_id": "item_abyssal_aegis", "item_name": "심연의 방패", "drop_rate": 0.01 },
+      { "item_id": "item_sword_of_dawn", "item_name": "여명의 성검", "drop_rate": 0.03 }
+    ],
+    "respawn_time_seconds": 604800,
+    "description": "아르카니아 대륙에 영원한 어둠을 드리우려는 태고의 마왕. 천 년 전 빛의 용사에 의해 봉인되었으나, 봉인이 약해지며 다시 깨어났다. 절대적인 암흑 마력을 지닌 최강의 존재이며, 그의 앞에 선 자는 절망 그 자체를 마주하게 된다."
+  }
+]

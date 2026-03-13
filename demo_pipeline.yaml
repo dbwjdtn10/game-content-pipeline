@@ -1,0 +1,45 @@
+# demo_pipeline.yaml
+# 시즌2 콘텐츠 일괄 생성 데모 파이프라인
+# 실행: gcpipe pipeline run --config demo_pipeline.yaml --async
+
+pipeline:
+  name: "시즌2 콘텐츠 일괄 생성"
+
+  steps:
+    - name: generate_weapons
+      generator: item
+      params:
+        type: weapon
+        rarity: [epic, legendary]
+        count: 10
+        theme: "화염"
+        level_range: [50, 60]
+
+    - name: generate_monsters
+      generator: monster
+      params:
+        region: "화산 지대"
+        count: 5
+        level_range: [50, 60]
+        difficulty: [normal, elite, boss]
+
+    - name: generate_quests
+      generator: quest
+      params:
+        type: [side]
+        region: "화산 지대"
+        count: 3
+      depends_on: [generate_weapons, generate_monsters]
+
+    - name: validate_all
+      validator: [consistency, balance, duplicate]
+      target: [generate_weapons, generate_monsters, generate_quests]
+
+    - name: export
+      format: [json, csv, markdown]
+      template_dir: game_data/templates/
+
+  options:
+    async: true
+    retry_on_fail: 2
+    auto_fix: true

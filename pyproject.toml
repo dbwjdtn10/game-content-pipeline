@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "game-content-pipeline"
+version = "0.1.0"
+description = "AI-powered game content generation pipeline"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+    "google-genai",
+    "celery[redis]",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "typer[all]",
+    "rich",
+    "sqlalchemy>=2.0",
+    "alembic",
+    "fastapi",
+    "uvicorn",
+    "streamlit",
+    "jinja2",
+    "psycopg2-binary",
+    "redis",
+    "structlog",
+    "httpx",
+    "numpy",
+    "pandas",
+    "pyyaml",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+]
+
+[project.scripts]
+gcpipe = "src.cli.main:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

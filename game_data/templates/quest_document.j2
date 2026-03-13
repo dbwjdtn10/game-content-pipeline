@@ -1,0 +1,92 @@
+{#- Jinja2 Template: Quest Planning Document -#}
+{#- Input: quest (object matching quest_schema.json) -#}
+
+{% set quest_type_labels = {"main": "메인 퀘스트", "side": "사이드 퀘스트", "daily": "일일 퀘스트", "event": "이벤트 퀘스트"} %}
+
+# 퀘스트 기획서: {{ quest.title }}
+
+**퀘스트 ID:** {{ quest.id }}
+**유형:** {{ quest_type_labels[quest.type] }}
+**지역:** {{ quest.region }}
+**권장 레벨:** Lv.{{ quest.level_range[0] }} ~ Lv.{{ quest.level_range[1] }}
+**예상 소요 시간:** {{ quest.estimated_time_minutes }}분
+**의뢰 NPC:** {{ quest.npc }}
+
+---
+
+## 퀘스트 요약
+
+{{ quest.description }}
+
+---
+
+## 배경 스토리
+
+{{ quest.background }}
+
+---
+
+## 진행 단계
+
+{% for step in quest.steps %}
+### {{ step.order }}단계: {{ step.objective }}
+
+{{ step.description }}
+
+{% endfor %}
+
+---
+
+## 선행 조건
+
+{% if quest.prerequisites %}
+{% for prereq in quest.prerequisites %}
+- {{ prereq }}
+{% endfor %}
+{% else %}
+- 없음 (바로 수행 가능)
+{% endif %}
+
+---
+
+## 보상
+
+{% set reward_type_labels = {"item": "아이템", "gold": "골드", "exp": "경험치", "skill_point": "스킬 포인트", "title": "칭호"} %}
+
+| 보상 유형 | 보상명 | 수량 |
+|-----------|--------|------|
+{% for reward in quest.rewards %}
+| {{ reward_type_labels[reward.type] }} | {{ reward.name }} | {{ reward.amount }} |
+{% endfor %}
+
+---
+
+## 기획 참고 사항
+
+### 난이도 평가
+- **전투 난이도:** {% if quest.type == "main" %}중상{% elif quest.type == "side" %}중{% elif quest.type == "daily" %}하{% else %}변동{% endif %}
+
+- **탐색 난이도:** {% if quest.steps | length > 4 %}중상{% elif quest.steps | length > 2 %}중{% else %}하{% endif %}
+
+- **총 단계 수:** {{ quest.steps | length }}단계
+
+### 연관 콘텐츠
+- **지역:** {{ quest.region }}
+- **NPC:** {{ quest.npc }}
+{% if quest.prerequisites %}
+- **선행 퀘스트:** {{ quest.prerequisites | join(", ") }}
+{% endif %}
+
+---
+
+## QA 체크리스트
+
+- [ ] 모든 단계가 순차적으로 진행 가능한지 확인
+- [ ] NPC 대사가 세계관 톤 가이드에 부합하는지 확인
+- [ ] 보상이 레벨 범위에 적절한지 확인
+- [ ] 선행 조건이 정상 작동하는지 확인
+- [ ] 관련 몬스터 및 아이템이 정상 배치되어 있는지 확인
+- [ ] 예상 소요 시간이 실제 플레이 시간과 일치하는지 확인
+
+---
+*문서 생성일: {{ generated_date | default("N/A") }}*

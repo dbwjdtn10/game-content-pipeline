@@ -1,0 +1,87 @@
+[
+  {
+    "id": "item_flame_greatsword",
+    "name": "화염의 대검",
+    "description": "고대 용의 불꽃으로 단조된 거대한 검. 칼날에서 끊임없이 화염이 타오르며, 베인 자리에 깊은 화상을 남긴다.",
+    "rarity": "epic",
+    "type": "weapon",
+    "level_requirement": 52,
+    "stats": {
+      "atk": 340,
+      "def": 20,
+      "hp": 150,
+      "mp": 0
+    },
+    "special_effect": "공격 시 10% 확률로 대상에게 3초간 화상 피해(공격력의 15%) 부여",
+    "lore": "멸망한 드래곤 로드 발카스의 숨결이 깃든 검으로, 손잡이를 쥐면 고대 전장의 함성이 들린다고 전해진다.",
+    "obtained_from": "화산 심연 보스 '용암 군주 이그니스' 처치 시 드롭"
+  },
+  {
+    "id": "item_frost_shield",
+    "name": "서리 수호의 방패",
+    "description": "영겁의 빙하에서 깎아 만든 방패. 공격을 받을 때마다 주변에 냉기를 방출하여 적의 이동 속도를 저하시킨다.",
+    "rarity": "rare",
+    "type": "armor",
+    "level_requirement": 45,
+    "stats": {
+      "atk": 0,
+      "def": 280,
+      "hp": 400,
+      "mp": 50
+    },
+    "special_effect": "피격 시 20% 확률로 주변 3m 내 적 이동속도 30% 감소 (2초)",
+    "lore": "북방 얼음 왕국의 근위대가 사용하던 방패로, 왕국이 멸망한 뒤에도 차가운 기운이 사라지지 않았다.",
+    "obtained_from": "얼음 동굴 정예 몬스터 처치 시 드롭"
+  },
+  {
+    "id": "item_moonlight_ring",
+    "name": "월광의 반지",
+    "description": "달빛을 머금은 신비로운 반지. 착용자의 마나 회복 속도를 증가시키며, 밤에는 효과가 두 배로 강해진다.",
+    "rarity": "uncommon",
+    "type": "accessory",
+    "level_requirement": 30,
+    "stats": {
+      "atk": 0,
+      "def": 10,
+      "hp": 50,
+      "mp": 200
+    },
+    "special_effect": "마나 자연 회복량 25% 증가, 밤 시간대 50% 증가",
+    "lore": "은둔 마법사 루나리아가 보름달 아래에서 정제한 마법석을 세공하여 만든 반지.",
+    "obtained_from": "달빛 숲 필드 보스 '루나 엘크' 처치 시 드롭"
+  },
+  {
+    "id": "item_elixir_of_giants",
+    "name": "거인의 비약",
+    "description": "고대 거인족의 비밀 조제법으로 만들어진 묵직한 약병. 복용하면 일시적으로 신체가 강화되어 전투력이 크게 상승한다.",
+    "rarity": "common",
+    "type": "consumable",
+    "level_requirement": 10,
+    "stats": {
+      "atk": 50,
+      "def": 30,
+      "hp": 100,
+      "mp": 0
+    },
+    "special_effect": "30분간 공격력/방어력 10% 증가",
+    "lore": "거인의 뼈를 갈아 만든 가루와 산삼 추출물을 혼합한 약제.",
+    "obtained_from": "연금술사 NPC 상점 구매"
+  },
+  {
+    "id": "item_shadow_dagger",
+    "name": "그림자 단도",
+    "description": "어둠의 정수를 녹여 만든 단도. 빛이 닿지 않는 곳에서는 완전한 투명 상태가 되어 적의 급소를 노릴 수 있다.",
+    "rarity": "legendary",
+    "type": "weapon",
+    "level_requirement": 70,
+    "stats": {
+      "atk": 520,
+      "def": 0,
+      "hp": 80,
+      "mp": 100
+    },
+    "special_effect": "은신 상태에서 공격 시 치명타 확률 100%, 치명타 피해 200% 증가",
+    "lore": "암흑 길드 '그림자 손' 의 수장만이 사용했던 전설적인 암살 무기. 이 단도에 찔린 자는 자신의 그림자에게 삼켜진다는 전설이 있다.",
+    "obtained_from": "숨겨진 던전 '그림자의 심연' 최종 보스 처치 시 드롭 (0.1% 확률)"
+  }
+]

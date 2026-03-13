@@ -1,0 +1,147 @@
+{#- Jinja2 Template: Patch Note Document -#}
+{#- Input variables:
+     version (string): patch version
+     date (string): release date
+     title (string): patch title
+     summary (string): brief summary
+     new_items (list of item objects, optional)
+     new_monsters (list of monster objects, optional)
+     new_quests (list of quest objects, optional)
+     balance_changes (list of {target, category, before, after, reason} objects, optional)
+     bug_fixes (list of {description, severity} objects, optional)
+     known_issues (list of strings, optional)
+-#}
+
+# 패치 노트 v{{ version }}
+
+**배포일:** {{ date }}
+**패치명:** {{ title }}
+
+---
+
+## 개요
+
+{{ summary }}
+
+---
+
+{% if new_items %}
+## 신규 아이템
+
+{% set rarity_labels = {"common": "일반", "uncommon": "고급", "rare": "희귀", "epic": "영웅", "legendary": "전설"} %}
+{% set type_labels = {"weapon": "무기", "armor": "방어구", "accessory": "장신구", "consumable": "소모품"} %}
+
+| 아이템명 | 등급 | 유형 | 요구 레벨 | 주요 스탯 |
+|----------|------|------|-----------|-----------|
+{% for item in new_items %}
+| {{ item.name }} | {{ rarity_labels[item.rarity] }} | {{ type_labels[item.type] }} | Lv.{{ item.level_requirement }} | ATK {{ item.stats.atk }} / DEF {{ item.stats.def }} / HP {{ item.stats.hp }} / MP {{ item.stats.mp }} |
+{% endfor %}
+
+{% for item in new_items %}
+### {{ item.name }}
+
+- **설명:** {{ item.description }}
+{% if item.special_effect %}
+- **특수 효과:** {{ item.special_effect }}
+{% endif %}
+- **획득 방법:** {{ item.obtained_from }}
+
+{% endfor %}
+{% endif %}
+
+{% if new_monsters %}
+## 신규 몬스터
+
+{% set mob_type_labels = {"normal": "일반", "elite": "엘리트", "boss": "보스"} %}
+
+| 몬스터명 | 유형 | 레벨 | 지역 | HP |
+|----------|------|------|------|----|
+{% for monster in new_monsters %}
+| {{ monster.name }} | {{ mob_type_labels[monster.type] }} | Lv.{{ monster.level }} | {{ monster.region }} | {{ monster.stats.hp }} |
+{% endfor %}
+
+{% for monster in new_monsters %}
+### {{ monster.name }}
+
+- **설명:** {{ monster.description }}
+- **보유 스킬:** {% for skill in monster.skills %}{{ skill.name }}{% if not loop.last %}, {% endif %}{% endfor %}
+
+- **드롭 아이템:**
+{% for drop in monster.drop_items %}
+  - {{ drop.item_name }} ({{ (drop.drop_rate * 100) | round(2) }}%)
+{% endfor %}
+
+{% endfor %}
+{% endif %}
+
+{% if new_quests %}
+## 신규 퀘스트
+
+{% set quest_type_labels = {"main": "메인", "side": "사이드", "daily": "일일", "event": "이벤트"} %}
+
+| 퀘스트명 | 유형 | 지역 | 권장 레벨 | 예상 소요 시간 |
+|----------|------|------|-----------|----------------|
+{% for quest in new_quests %}
+| {{ quest.title }} | {{ quest_type_labels[quest.type] }} | {{ quest.region }} | Lv.{{ quest.level_range[0] }}~{{ quest.level_range[1] }} | {{ quest.estimated_time_minutes }}분 |
+{% endfor %}
+
+{% for quest in new_quests %}
+### {{ quest.title }}
+
+- **설명:** {{ quest.description }}
+- **NPC:** {{ quest.npc }}
+- **주요 보상:**
+{% for reward in quest.rewards %}
+  - {{ reward.name }}{% if reward.amount > 1 %} x{{ reward.amount }}{% endif %}
+
+{% endfor %}
+
+{% endfor %}
+{% endif %}
+
+{% if balance_changes %}
+## 밸런스 조정
+
+| 대상 | 분류 | 변경 전 | 변경 후 | 사유 |
+|------|------|---------|---------|------|
+{% for change in balance_changes %}
+| {{ change.target }} | {{ change.category }} | {{ change.before }} | {{ change.after }} | {{ change.reason }} |
+{% endfor %}
+
+{% for change in balance_changes %}
+### {{ change.target }} - {{ change.category }}
+
+- **변경 전:** {{ change.before }}
+- **변경 후:** {{ change.after }}
+- **사유:** {{ change.reason }}
+
+{% endfor %}
+{% endif %}
+
+{% if bug_fixes %}
+## 버그 수정
+
+{% set severity_labels = {"critical": "긴급", "major": "주요", "minor": "경미"} %}
+
+| 내용 | 심각도 |
+|------|--------|
+{% for fix in bug_fixes %}
+| {{ fix.description }} | {{ severity_labels.get(fix.severity, fix.severity) }} |
+{% endfor %}
+
+{% for fix in bug_fixes %}
+- **[{{ severity_labels.get(fix.severity, fix.severity) }}]** {{ fix.description }}
+{% endfor %}
+{% endif %}
+
+{% if known_issues %}
+## 알려진 문제
+
+{% for issue in known_issues %}
+- {{ issue }}
+{% endfor %}
+{% endif %}
+
+---
+
+*본 패치 노트에 대한 문의 사항은 공식 커뮤니티를 이용해 주십시오.*

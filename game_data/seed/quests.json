@@ -1,0 +1,210 @@
+[
+  {
+    "id": "quest_first_step",
+    "title": "모험의 첫걸음",
+    "type": "main",
+    "description": "초원 마을의 촌장이 마을 주변에 출몰하는 마물을 처치해달라고 요청한다.",
+    "background": "아르카니아 대륙 변방의 작은 마을 '초원의 안식처'는 최근 마물의 출몰이 잦아지면서 위기에 처해 있다. 마을 촌장 하겐은 지나가는 모험가들에게 도움을 요청하고 있으며, 이것이 당신의 첫 번째 모험이 될 것이다. 마을 주변의 슬라임과 멧돼지를 처치하여 마을의 안전을 되찾아야 한다.",
+    "npc": "촌장 하겐",
+    "region": "푸른 초원",
+    "level_range": [1, 5],
+    "steps": [
+      {
+        "order": 1,
+        "objective": "촌장 하겐과 대화",
+        "description": "초원 마을 중앙 광장에 있는 촌장 하겐을 찾아가 마을의 상황에 대해 이야기를 들어라."
+      },
+      {
+        "order": 2,
+        "objective": "초록 슬라임 10마리 처치",
+        "description": "마을 북쪽 초원에 서식하는 초록 슬라임을 10마리 처치하라. 슬라임의 핵을 증거로 가져가야 한다."
+      },
+      {
+        "order": 3,
+        "objective": "야생 멧돼지 5마리 처치",
+        "description": "마을 동쪽 언덕에 출몰하는 야생 멧돼지를 5마리 처치하라. 멧돼지들이 농작물을 망치고 있다."
+      },
+      {
+        "order": 4,
+        "objective": "촌장 하겐에게 보고",
+        "description": "마물 처치를 완료한 후 촌장 하겐에게 돌아가 결과를 보고하라."
+      }
+    ],
+    "rewards": [
+      { "type": "exp", "name": "경험치", "amount": 500 },
+      { "type": "gold", "name": "골드", "amount": 200 },
+      { "type": "item", "name": "무쇠 장검", "amount": 1, "item_id": "item_iron_longsword" }
+    ],
+    "prerequisites": [],
+    "estimated_time_minutes": 15
+  },
+  {
+    "id": "quest_forest_crisis",
+    "title": "숲의 위기",
+    "type": "main",
+    "description": "속삭이는 숲의 균형이 무너지고 있다. 숲의 골렘을 처치하고 원인을 조사하라.",
+    "background": "속삭이는 숲은 오랜 세월 동안 정령들에 의해 균형이 유지되어 왔으나, 최근 어둠의 기운이 침투하면서 정령들이 폭주하기 시작했다. 숲의 현자 엘드라는 이 이변의 원인이 숲의 골렘이 암흑 마력에 오염된 데 있다고 판단하고, 모험가에게 골렘을 정화하거나 처치해줄 것을 부탁한다. 이 사건은 어둠의 군주 벨카자르의 부활과 연관이 있을 수 있다.",
+    "npc": "숲의 현자 엘드라",
+    "region": "속삭이는 숲",
+    "level_range": [18, 25],
+    "steps": [
+      {
+        "order": 1,
+        "objective": "숲의 현자 엘드라와 대화",
+        "description": "숲 입구의 은둔처에 있는 현자 엘드라를 찾아가 숲에서 벌어지고 있는 이변에 대해 들어라."
+      },
+      {
+        "order": 2,
+        "objective": "오염된 나무 정령 8마리 처치",
+        "description": "숲 중부에 출몰하는 오염된 나무 정령을 처치하고 오염된 수액 표본을 수집하라."
+      },
+      {
+        "order": 3,
+        "objective": "오염 근원지 조사",
+        "description": "숲 최심부에 위치한 세계수 앞의 오염 근원지를 조사하라. 암흑 마력의 흔적을 찾아야 한다."
+      },
+      {
+        "order": 4,
+        "objective": "숲의 골렘 처치",
+        "description": "암흑 마력에 오염되어 폭주한 숲의 골렘을 처치하라. 파티를 구성하여 도전하는 것을 권장한다."
+      },
+      {
+        "order": 5,
+        "objective": "엘드라에게 오염 표본 전달",
+        "description": "골렘에게서 회수한 오염된 핵과 수액 표본을 현자 엘드라에게 전달하라."
+      }
+    ],
+    "rewards": [
+      { "type": "exp", "name": "경험치", "amount": 3500 },
+      { "type": "gold", "name": "골드", "amount": 1200 },
+      { "type": "item", "name": "숲 수호자의 활", "amount": 1, "item_id": "item_forest_guardian_bow" },
+      { "type": "title", "name": "칭호: 숲의 해방자", "amount": 1 }
+    ],
+    "prerequisites": ["quest_first_step"],
+    "estimated_time_minutes": 45
+  },
+  {
+    "id": "quest_volcanic_forge",
+    "title": "화산의 시련",
+    "type": "main",
+    "description": "불의 산맥에서 전설의 무기를 제련하기 위해 화염의 수호자를 처치하고 화염 정수를 획득하라.",
+    "background": "어둠의 군주에 맞서기 위해서는 더 강력한 무기가 필요하다. 드워프 명장 브루놀은 불의 산맥의 화산 분화구에서만 얻을 수 있는 화염 정수를 사용하여 전설적인 무기를 단조할 수 있다고 말한다. 그러나 분화구는 화염의 수호자가 지키고 있으며, 그를 쓰러뜨리지 않고서는 정수를 얻을 수 없다.",
+    "npc": "드워프 명장 브루놀",
+    "region": "불의 산맥",
+    "level_range": [30, 38],
+    "steps": [
+      {
+        "order": 1,
+        "objective": "드워프 명장 브루놀과 대화",
+        "description": "불의 산맥 기슭의 대장간에 있는 브루놀을 찾아가 전설 무기 제련에 대해 이야기하라."
+      },
+      {
+        "order": 2,
+        "objective": "화염 임프 15마리 처치하여 화염석 수집",
+        "description": "화산 중턱에 서식하는 화염 임프를 처치하고 화염석 15개를 수집하라. 이것은 제련의 보조 재료이다."
+      },
+      {
+        "order": 3,
+        "objective": "용암 드레이크의 비늘 획득",
+        "description": "용암 드레이크를 처치하여 내열성이 뛰어난 용암 드레이크의 비늘 3장을 획득하라."
+      },
+      {
+        "order": 4,
+        "objective": "화염의 수호자 처치 및 화염 정수 획득",
+        "description": "화산 분화구에서 화염의 수호자를 처치하고 화염 정수를 획득하라. 반드시 파티를 구성하여 도전할 것."
+      },
+      {
+        "order": 5,
+        "objective": "브루놀에게 재료 전달",
+        "description": "화염석, 용암 드레이크 비늘, 화염 정수를 브루놀에게 전달하여 무기 제련을 의뢰하라."
+      },
+      {
+        "order": 6,
+        "objective": "완성된 무기 수령",
+        "description": "24시간(게임 내 시간) 후 브루놀에게 돌아가 완성된 화염의 칼날을 수령하라."
+      }
+    ],
+    "rewards": [
+      { "type": "exp", "name": "경험치", "amount": 8000 },
+      { "type": "gold", "name": "골드", "amount": 3500 },
+      { "type": "item", "name": "화염의 칼날", "amount": 1, "item_id": "item_flame_blade" },
+      { "type": "item", "name": "화산암 판금갑", "amount": 1, "item_id": "item_volcanic_plate" }
+    ],
+    "prerequisites": ["quest_forest_crisis"],
+    "estimated_time_minutes": 60
+  },
+  {
+    "id": "quest_daily_herb",
+    "title": "약초 수집",
+    "type": "daily",
+    "description": "약초사 엘리나를 위해 초원에서 약초를 채집하라.",
+    "background": "초원 마을의 약초사 엘리나는 매일 치유 물약을 조제하기 위해 신선한 약초가 필요하다. 모험가들이 초원을 돌아다니며 약초를 채집해 오면, 그 대가로 물약과 보수를 제공한다. 간단하지만 꾸준히 수행하면 상당한 보상을 얻을 수 있다.",
+    "npc": "약초사 엘리나",
+    "region": "푸른 초원",
+    "level_range": [1, 99],
+    "steps": [
+      {
+        "order": 1,
+        "objective": "약초사 엘리나와 대화",
+        "description": "초원 마을의 약초 가게에 있는 엘리나에게 오늘의 약초 수집 의뢰를 받아라."
+      },
+      {
+        "order": 2,
+        "objective": "푸른 약초 10개 채집",
+        "description": "초원 전역에서 자생하는 푸른 약초를 10개 채집하라. 약초는 빛나는 지점에서 찾을 수 있다."
+      },
+      {
+        "order": 3,
+        "objective": "엘리나에게 약초 납품",
+        "description": "채집한 푸른 약초 10개를 엘리나에게 가져다 주어라."
+      }
+    ],
+    "rewards": [
+      { "type": "exp", "name": "경험치", "amount": 200 },
+      { "type": "gold", "name": "골드", "amount": 100 },
+      { "type": "item", "name": "하급 치유의 물약", "amount": 3, "item_id": "item_minor_heal_potion" }
+    ],
+    "prerequisites": [],
+    "estimated_time_minutes": 10
+  },
+  {
+    "id": "quest_wolf_hunter",
+    "title": "늑대 사냥꾼의 의뢰",
+    "type": "side",
+    "description": "초원의 사냥꾼 카엘이 거대 늑대 무리의 위협을 제거해줄 것을 요청한다.",
+    "background": "초원 외곽의 사냥꾼 카엘은 최근 거대 늑대 무리가 비정상적으로 늘어나 사냥터가 위험해졌다고 호소한다. 늑대 무리의 우두머리를 처치하면 무리가 흩어질 것이라 판단하고, 실력 있는 모험가에게 도움을 요청한다. 카엘은 보답으로 자신이 아끼던 물건을 내어줄 것이다.",
+    "npc": "사냥꾼 카엘",
+    "region": "푸른 초원",
+    "level_range": [5, 12],
+    "steps": [
+      {
+        "order": 1,
+        "objective": "사냥꾼 카엘과 대화",
+        "description": "초원 동쪽 사냥꾼의 오두막에 있는 카엘을 찾아가 늑대 무리에 대한 정보를 들어라."
+      },
+      {
+        "order": 2,
+        "objective": "야생 늑대 10마리 처치",
+        "description": "초원 외곽에서 야생 늑대 10마리를 처치하여 무리의 규모를 줄여라."
+      },
+      {
+        "order": 3,
+        "objective": "거대 늑대 처치",
+        "description": "늑대 무리의 우두머리인 거대 늑대를 찾아 처치하라. 초원 북동쪽 바위 언덕 근처에서 출몰한다."
+      },
+      {
+        "order": 4,
+        "objective": "카엘에게 거대 늑대의 송곳니 전달",
+        "description": "거대 늑대의 송곳니를 증거로 카엘에게 가져가라."
+      }
+    ],
+    "rewards": [
+      { "type": "exp", "name": "경험치", "amount": 800 },
+      { "type": "gold", "name": "골드", "amount": 350 },
+      { "type": "item", "name": "늑대 송곳니 목걸이", "amount": 1, "item_id": "item_wolf_fang_necklace" },
+      { "type": "title", "name": "칭호: 초원의 사냥꾼", "amount": 1 }
+    ],
+    "prerequisites": ["quest_first_step"],
+    "estimated_time_minutes": 25
+  }
+]

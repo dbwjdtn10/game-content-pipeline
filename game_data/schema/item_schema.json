@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GameItem",
+  "description": "Schema for fantasy RPG game items",
+  "type": "object",
+  "required": [
+    "name",
+    "description",
+    "rarity",
+    "type",
+    "level_requirement",
+    "stats",
+    "special_effect",
+    "lore",
+    "obtained_from"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^item_[a-z0-9_]+$",
+      "description": "Unique item identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "Item name in Korean"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 300,
+      "description": "Item description in Korean"
+    },
+    "rarity": {
+      "type": "string",
+      "enum": ["common", "uncommon", "rare", "epic", "legendary"],
+      "description": "Item rarity tier"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["weapon", "armor", "accessory", "consumable"],
+      "description": "Item category"
+    },
+    "level_requirement": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99,
+      "description": "Minimum level required to use this item"
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "atk": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Attack power bonus"
+        },
+        "def": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Defense bonus"
+        },
+        "hp": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Hit points bonus"
+        },
+        "mp": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Mana points bonus"
+        }
+      },
+      "required": ["atk", "def", "hp", "mp"],
+      "additionalProperties": false
+    },
+    "special_effect": {
+      "type": ["string", "null"],
+      "maxLength": 200,
+      "description": "Special effect description, null if none"
+    },
+    "lore": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "Lore text in Korean"
+    },
+    "obtained_from": {
+      "type": "string",
+      "minLength": 1,
+      "description": "How this item is obtained"
+    }
+  },
+  "additionalProperties": false
+}

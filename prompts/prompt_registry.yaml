@@ -1,0 +1,72 @@
+# Prompt Registry for Game Content Pipeline
+# Maps prompt names to their active versions and file paths
+
+prompts:
+  item_generation:
+    name: "Item Generation System Prompt"
+    description: "System prompt for generating game items with proper stats, naming, and lore"
+    active_version: "v1"
+    versions:
+      v1:
+        path: "prompts/v1/item_system.txt"
+        created_at: "2026-03-13"
+        author: "system"
+        changelog: "Initial version with full stat scaling rules and naming conventions"
+        status: "active"
+
+  monster_generation:
+    name: "Monster Generation System Prompt"
+    description: "System prompt for generating monsters with skills, drops, and regional characteristics"
+    active_version: "v1"
+    versions:
+      v1:
+        path: "prompts/v1/monster_system.txt"
+        created_at: "2026-03-13"
+        author: "system"
+        changelog: "Initial version with type-based scaling, skill design rules, and drop tables"
+        status: "active"
+
+  quest_generation:
+    name: "Quest Story Generation System Prompt"
+    description: "System prompt for generating quest stories with steps, rewards, and NPC interactions"
+    active_version: "v1"
+    versions:
+      v1:
+        path: "prompts/v1/quest_system.txt"
+        created_at: "2026-03-13"
+        author: "system"
+        changelog: "Initial version with quest type guidelines, reward scaling, and NPC tone guide"
+        status: "active"
+
+  content_validation:
+    name: "Content Validation System Prompt"
+    description: "System prompt for validating generated content against schema, tone, worldbuilding, and balance rules"
+    active_version: "v1"
+    versions:
+      v1:
+        path: "prompts/v1/validation_system.txt"
+        created_at: "2026-03-13"
+        author: "system"
+        changelog: "Initial version with schema, tone, worldbuilding, balance, and reference checks"
+        status: "active"
+
+# Schema file references
+schemas:
+  item: "game_data/schema/item_schema.json"
+  monster: "game_data/schema/monster_schema.json"
+  quest: "game_data/schema/quest_schema.json"
+  skill: "game_data/schema/skill_schema.json"
+
+# Seed data references
+seed_data:
+  items: "game_data/seed/items.json"
+  monsters: "game_data/seed/monsters.json"
+  quests: "game_data/seed/quests.json"
+  world_setting: "game_data/seed/world_setting.md"
+
+# Template references
+templates:
+  item_description: "game_data/templates/item_description.j2"
+  patch_note: "game_data/templates/patch_note.j2"
+  quest_document: "game_data/templates/quest_document.j2"
+  balance_report: "game_data/templates/balance_report.j2"

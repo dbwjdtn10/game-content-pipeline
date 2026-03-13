@@ -1,0 +1,131 @@
+[
+  {
+    "id": "mob_lava_golem",
+    "name": "용암 골렘",
+    "type": "elite",
+    "level": 55,
+    "region": "화산 심연",
+    "stats": {
+      "hp": 85000,
+      "atk": 420,
+      "def": 350,
+      "speed": 60
+    },
+    "skills": [
+      {
+        "name": "용암 분출",
+        "type": "active",
+        "damage_multiplier": 2.5,
+        "cooldown_seconds": 12.0,
+        "description": "주변 5m 범위에 용암을 분출하여 지속 화상 피해를 입힌다."
+      },
+      {
+        "name": "바위 껍질",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 30.0,
+        "description": "10초간 받는 피해를 40% 감소시키는 바위 갑옷을 생성한다."
+      }
+    ],
+    "drop_items": [
+      {
+        "item_id": "item_flame_greatsword",
+        "item_name": "화염의 대검",
+        "drop_rate": 0.05
+      },
+      {
+        "item_id": "item_lava_core",
+        "item_name": "용암 핵",
+        "drop_rate": 0.3
+      }
+    ],
+    "respawn_time_seconds": 600,
+    "description": "화산 심연 깊은 곳에서 용암이 응축되어 탄생한 거대한 골렘. 몸 전체가 붉게 달아올라 있으며, 가까이 다가가는 것만으로도 화상을 입을 수 있다."
+  },
+  {
+    "id": "mob_frost_wolf",
+    "name": "서리 늑대",
+    "type": "normal",
+    "level": 40,
+    "region": "얼음 동굴",
+    "stats": {
+      "hp": 12000,
+      "atk": 180,
+      "def": 120,
+      "speed": 150
+    },
+    "skills": [
+      {
+        "name": "냉기 이빨",
+        "type": "active",
+        "damage_multiplier": 1.5,
+        "cooldown_seconds": 6.0,
+        "description": "얼음을 머금은 이빨로 대상을 물어 추가 냉기 피해를 입힌다."
+      }
+    ],
+    "drop_items": [
+      {
+        "item_id": "item_frost_fang",
+        "item_name": "서리 송곳니",
+        "drop_rate": 0.15
+      }
+    ],
+    "respawn_time_seconds": 120,
+    "description": "얼음 동굴을 배회하는 은빛 털의 거대한 늑대. 무리를 지어 다니며, 사냥감을 발견하면 냉기를 내뿜어 움직임을 봉쇄한다."
+  },
+  {
+    "id": "mob_dragon_lord_ignis",
+    "name": "용암 군주 이그니스",
+    "type": "boss",
+    "level": 60,
+    "region": "화산 심연",
+    "stats": {
+      "hp": 500000,
+      "atk": 850,
+      "def": 600,
+      "speed": 90
+    },
+    "skills": [
+      {
+        "name": "브레스 오브 카오스",
+        "type": "active",
+        "damage_multiplier": 4.0,
+        "cooldown_seconds": 20.0,
+        "description": "전방 부채꼴 범위에 혼돈의 화염을 내뿜어 막대한 피해를 입힌다."
+      },
+      {
+        "name": "용의 포효",
+        "type": "debuff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 45.0,
+        "description": "모든 파티원의 공격력과 방어력을 15초간 20% 감소시킨다."
+      },
+      {
+        "name": "마그마 장벽",
+        "type": "buff",
+        "damage_multiplier": 0,
+        "cooldown_seconds": 60.0,
+        "description": "HP가 30% 이하일 때 자동 발동. 15초간 받는 피해 70% 감소."
+      }
+    ],
+    "drop_items": [
+      {
+        "item_id": "item_flame_greatsword",
+        "item_name": "화염의 대검",
+        "drop_rate": 0.01
+      },
+      {
+        "item_id": "item_ignis_crown",
+        "item_name": "이그니스의 왕관",
+        "drop_rate": 0.005
+      },
+      {
+        "item_id": "item_dragon_scale",
+        "item_name": "용의 비늘",
+        "drop_rate": 0.2
+      }
+    ],
+    "respawn_time_seconds": 3600,
+    "description": "화산 심연의 최심부에 잠든 고대 드래곤 로드. 수천 년의 잠에서 깨어나면 그 분노로 대지가 갈라지고 하늘이 불타오른다고 전해진다."
+  }
+]

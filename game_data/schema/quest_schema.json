@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GameQuest",
+  "description": "Schema for fantasy RPG game quests",
+  "type": "object",
+  "required": [
+    "title",
+    "type",
+    "description",
+    "background",
+    "npc",
+    "region",
+    "level_range",
+    "steps",
+    "rewards",
+    "prerequisites",
+    "estimated_time_minutes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^quest_[a-z0-9_]+$",
+      "description": "Unique quest identifier"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "Quest title in Korean"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["main", "side", "daily", "event"],
+      "description": "Quest category"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "Short quest description in Korean"
+    },
+    "background": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 1000,
+      "description": "Quest background story in Korean"
+    },
+    "npc": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Quest-giving NPC name in Korean"
+    },
+    "region": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Region where the quest takes place"
+    },
+    "level_range": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 99
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Recommended level range [min, max]"
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Step sequence number"
+          },
+          "objective": {
+            "type": "string",
+            "description": "Step objective summary in Korean"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed step description in Korean"
+          }
+        },
+        "required": ["order", "objective", "description"]
+      },
+      "minItems": 1,
+      "description": "Ordered list of quest steps"
+    },
+    "rewards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["item", "gold", "exp", "skill_point", "title"],
+            "description": "Reward type"
+          },
+          "name": {
+            "type": "string",
+            "description": "Reward name or description"
+          },
+          "amount": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Reward quantity"
+          },
+          "item_id": {
+            "type": "string",
+            "description": "Item ID reference if reward type is item"
+          }
+        },
+        "required": ["type", "name", "amount"]
+      },
+      "minItems": 1,
+      "description": "Quest rewards"
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Quest ID or condition string"
+      },
+      "description": "Prerequisites that must be met before starting this quest"
+    },
+    "estimated_time_minutes": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Estimated completion time in minutes"
+    }
+  },
+  "additionalProperties": false
+}

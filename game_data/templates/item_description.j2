@@ -1,0 +1,59 @@
+{#- Jinja2 Template: Item Description Document -#}
+{#- Input: item (object matching item_schema.json) -#}
+
+{% set rarity_badges = {
+    "common": "⚪ 일반",
+    "uncommon": "🟢 고급",
+    "rare": "🔵 희귀",
+    "epic": "🟣 영웅",
+    "legendary": "🟠 전설"
+} %}
+
+{% set type_labels = {
+    "weapon": "무기",
+    "armor": "방어구",
+    "accessory": "장신구",
+    "consumable": "소모품"
+} %}
+
+# {{ item.name }}
+
+> {{ rarity_badges[item.rarity] }} | {{ type_labels[item.type] }} | 요구 레벨 {{ item.level_requirement }}
+
+---
+
+## 설명
+
+{{ item.description }}
+
+---
+
+## 스탯
+
+| 능력치 | 수치 |
+|--------|------|
+| 공격력 | {{ item.stats.atk }} |
+| 방어력 | {{ item.stats.def }} |
+| 체력   | {{ item.stats.hp }} |
+| 마나   | {{ item.stats.mp }} |
+
+{% if item.special_effect %}
+## 특수 효과
+
+**{{ item.special_effect }}**
+{% endif %}
+
+---
+
+## 배경 이야기
+
+*{{ item.lore }}*
+
+---
+
+## 획득 방법
+
+{{ item.obtained_from }}
+
+---
+*아이템 ID: {{ item.id }}*

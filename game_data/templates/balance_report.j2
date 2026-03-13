@@ -1,0 +1,165 @@
+{#- Jinja2 Template: Balance Analysis Report -#}
+{#- Input variables:
+     report_title (string): report title
+     report_date (string): generation date
+     analyst (string): analyst name or system
+     items (list of item objects): items to analyze
+     monsters (list of monster objects): monsters to analyze
+     level_brackets (list of {min, max, label} objects): level range brackets
+     findings (list of {category, severity, description, recommendation} objects, optional)
+     stat_curves (object with expected scaling data, optional)
+-#}
+
+# 밸런스 분석 보고서
+
+**보고서명:** {{ report_title }}
+**생성일:** {{ report_date }}
+**분석 주체:** {{ analyst | default("자동 분석 시스템") }}
+
+---
+
+## 1. 아이템 스탯 분석
+
+### 1.1 레벨 구간별 아이템 스탯 분포
+
+{% if items %}
+{% set type_labels = {"weapon": "무기", "armor": "방어구", "accessory": "장신구", "consumable": "소모품"} %}
+{% set rarity_labels = {"common": "일반", "uncommon": "고급", "rare": "희귀", "epic": "영웅", "legendary": "전설"} %}
+
+| 아이템명 | 유형 | 등급 | 레벨 | ATK | DEF | HP | MP | 총합 |
+|----------|------|------|------|-----|-----|----|----|------|
+{% for item in items | sort(attribute='level_requirement') %}
+| {{ item.name }} | {{ type_labels[item.type] }} | {{ rarity_labels[item.rarity] }} | {{ item.level_requirement }} | {{ item.stats.atk }} | {{ item.stats.def }} | {{ item.stats.hp }} | {{ item.stats.mp }} | {{ item.stats.atk + item.stats.def + item.stats.hp + item.stats.mp }} |
+{% endfor %}
+{% endif %}
+
+### 1.2 등급별 평균 스탯 (레벨 보정 전)
+
+{% if items %}
+{% for rarity in ["common", "uncommon", "rare", "epic", "legendary"] %}
+{% set rarity_items = items | selectattr("rarity", "equalto", rarity) | list %}
+{% if rarity_items %}
+**{{ rarity_labels[rarity] }} ({{ rarity_items | length }}개 아이템)**
+
+| 스탯 | 평균 | 최소 | 최대 |
+|------|------|------|------|
+| ATK | {{ (rarity_items | map(attribute='stats.atk') | sum / rarity_items | length) | round(1) }} | {{ rarity_items | map(attribute='stats.atk') | min }} | {{ rarity_items | map(attribute='stats.atk') | max }} |
+| DEF | {{ (rarity_items | map(attribute='stats.def') | sum / rarity_items | length) | round(1) }} | {{ rarity_items | map(attribute='stats.def') | min }} | {{ rarity_items | map(attribute='stats.def') | max }} |
+| HP | {{ (rarity_items | map(attribute='stats.hp') | sum / rarity_items | length) | round(1) }} | {{ rarity_items | map(attribute='stats.hp') | min }} | {{ rarity_items | map(attribute='stats.hp') | max }} |
+| MP | {{ (rarity_items | map(attribute='stats.mp') | sum / rarity_items | length) | round(1) }} | {{ rarity_items | map(attribute='stats.mp') | min }} | {{ rarity_items | map(attribute='stats.mp') | max }} |
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
+### 1.3 유형별 스탯 비교
+
+{% if items %}
+{% for item_type in ["weapon", "armor", "accessory", "consumable"] %}
+{% set typed_items = items | selectattr("type", "equalto", item_type) | list %}
+{% if typed_items %}
+**{{ type_labels[item_type] }} ({{ typed_items | length }}개)**
+
+| 아이템명 | 등급 | 레벨 | 주요 스탯 | 특수 효과 |
+|----------|------|------|-----------|-----------|
+{% for item in typed_items | sort(attribute='level_requirement') %}
+| {{ item.name }} | {{ rarity_labels[item.rarity] }} | {{ item.level_requirement }} | ATK {{ item.stats.atk }} / DEF {{ item.stats.def }} | {{ item.special_effect | default("없음") }} |
+{% endfor %}
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
+---
+
+## 2. 몬스터 스탯 분석
+
+{% if monsters %}
+{% set mob_type_labels = {"normal": "일반", "elite": "엘리트", "boss": "보스"} %}
+
+### 2.1 전체 몬스터 스탯 개요
+
+| 몬스터명 | 유형 | 레벨 | 지역 | HP | ATK | DEF | SPD | 스킬 수 |
+|----------|------|------|------|----|-----|-----|-----|---------|
+{% for mob in monsters | sort(attribute='level') %}
+| {{ mob.name }} | {{ mob_type_labels[mob.type] }} | {{ mob.level }} | {{ mob.region }} | {{ mob.stats.hp }} | {{ mob.stats.atk }} | {{ mob.stats.def }} | {{ mob.stats.speed }} | {{ mob.skills | length }} |
+{% endfor %}
+
+### 2.2 유형별 스탯 비교
+
+{% for mob_type in ["normal", "elite", "boss"] %}
+{% set typed_mobs = monsters | selectattr("type", "equalto", mob_type) | list %}
+{% if typed_mobs %}
+**{{ mob_type_labels[mob_type] }} 몬스터 ({{ typed_mobs | length }}마리)**
+
+| 스탯 | 평균 | 최소 | 최대 |
+|------|------|------|------|
+| HP | {{ (typed_mobs | map(attribute='stats.hp') | sum / typed_mobs | length) | round(0) }} | {{ typed_mobs | map(attribute='stats.hp') | min }} | {{ typed_mobs | map(attribute='stats.hp') | max }} |
+| ATK | {{ (typed_mobs | map(attribute='stats.atk') | sum / typed_mobs | length) | round(0) }} | {{ typed_mobs | map(attribute='stats.atk') | min }} | {{ typed_mobs | map(attribute='stats.atk') | max }} |
+| DEF | {{ (typed_mobs | map(attribute='stats.def') | sum / typed_mobs | length) | round(0) }} | {{ typed_mobs | map(attribute='stats.def') | min }} | {{ typed_mobs | map(attribute='stats.def') | max }} |
+
+{% endif %}
+{% endfor %}
+
+### 2.3 드롭 테이블 분석
+
+{% for mob in monsters | sort(attribute='level') %}
+{% if mob.drop_items %}
+**{{ mob.name }} (Lv.{{ mob.level }}, {{ mob_type_labels[mob.type] }})**
+
+| 드롭 아이템 | 드롭률 | 기대 처치 횟수 |
+|-------------|--------|----------------|
+{% for drop in mob.drop_items %}
+| {{ drop.item_name }} | {{ (drop.drop_rate * 100) | round(2) }}% | {{ (1 / drop.drop_rate) | round(0) }}회 |
+{% endfor %}
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
+---
+
+## 3. 밸런스 이슈 및 권고사항
+
+{% if findings %}
+{% set severity_labels = {"critical": "긴급", "warning": "경고", "info": "참고"} %}
+{% set severity_icons = {"critical": "🔴", "warning": "🟡", "info": "🔵"} %}
+
+| # | 심각도 | 분류 | 설명 |
+|---|--------|------|------|
+{% for finding in findings %}
+| {{ loop.index }} | {{ severity_icons[finding.severity] }} {{ severity_labels[finding.severity] }} | {{ finding.category }} | {{ finding.description }} |
+{% endfor %}
+
+{% for finding in findings %}
+### 이슈 #{{ loop.index }}: {{ finding.description }}
+
+- **분류:** {{ finding.category }}
+- **심각도:** {{ severity_labels[finding.severity] }}
+- **상세 설명:** {{ finding.description }}
+- **권고 사항:** {{ finding.recommendation }}
+
+{% endfor %}
+{% else %}
+현재 분석 범위 내에서 식별된 밸런스 이슈가 없습니다.
+{% endif %}
+
+---
+
+## 4. 스탯 스케일링 곡선
+
+{% if stat_curves %}
+### 기대 스케일링 vs 실제 스케일링
+
+| 레벨 구간 | 기대 ATK 범위 | 기대 DEF 범위 | 기대 HP 범위 |
+|-----------|---------------|---------------|--------------|
+{% for bracket in stat_curves.brackets | default([]) %}
+| Lv.{{ bracket.min }}~{{ bracket.max }} | {{ bracket.expected_atk_min }}~{{ bracket.expected_atk_max }} | {{ bracket.expected_def_min }}~{{ bracket.expected_def_max }} | {{ bracket.expected_hp_min }}~{{ bracket.expected_hp_max }} |
+{% endfor %}
+{% else %}
+스탯 스케일링 곡선 데이터가 제공되지 않았습니다.
+{% endif %}
+
+---
+
+*본 보고서는 자동 생성되었으며, 최종 판단은 게임 디자이너의 검토를 거쳐야 합니다.*
