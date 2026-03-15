@@ -76,6 +76,7 @@ class MonsterGenerator(BaseGenerator):
         count: int = 3,
         level_range: tuple[int, int] = (1, 99),
         difficulty: Literal["normal", "elite", "boss"] = "normal",
+        _feedback: str = "",
     ) -> list[GeneratedMonster]:
         """Generate *count* monsters matching the given parameters."""
         self.log.info(
@@ -84,6 +85,7 @@ class MonsterGenerator(BaseGenerator):
             count=count,
             level_range=level_range,
             difficulty=difficulty,
+            has_feedback=bool(_feedback),
         )
         prompt = self._build_prompt(
             region=region,
@@ -91,6 +93,7 @@ class MonsterGenerator(BaseGenerator):
             level_range=level_range,
             difficulty=difficulty,
         )
+        prompt = self._append_feedback(prompt, _feedback)
         raw = self._call_llm(prompt, response_schema=list[GeneratedMonster])
         monsters = self._parse_response(raw)
         self.log.info("monster_generate_done", generated=len(monsters))

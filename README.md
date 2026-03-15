@@ -152,7 +152,7 @@ PostgreSQL에 모든 생성 콘텐츠의 버전을 관리합니다. `draft > rev
 ### 1. 환경 설정
 
 ```bash
-git clone https://github.com/your-username/game-content-pipeline.git
+git clone https://github.com/dbwjdtn10/game-content-pipeline.git
 cd game-content-pipeline
 
 # 환경 변수 설정
@@ -336,25 +336,74 @@ game-content-pipeline/
 
 ---
 
-## 스크린샷 / 데모
+## 자가 개선 재생성 루프 (Self-Improving Regeneration)
 
-> 아래 섹션에 실행 결과 GIF 또는 스크린샷을 추가하세요.
+검증 실패 시 에러 피드백을 프롬프트에 주입하여 자동으로 재생성하는 핵심 기능입니다.
 
-### CLI 실행 화면
-<!-- gcpipe item generate 실행 결과 GIF -->
-`[screenshots/cli_item_generate.gif]`
+```
+┌───────────────┐     ┌──────────────┐     ┌───────────────┐
+│   Generator   │────>│  Validators  │────>│  All Passed?  │
+│  (LLM 호출)   │     │  (4중 검증)   │     │               │
+└───────────────┘     └──────────────┘     └───────┬───────┘
+       ^                                      │         │
+       │                                     YES       NO
+       │                                      │         │
+       │                                      v         v
+       │                               ┌──────────┐ ┌────────────────┐
+       │                               │  완료 ✅  │ │ 피드백 추출     │
+       │                               └──────────┘ │ (실패 사유 분석) │
+       │                                            └───────┬────────┘
+       │                                                    │
+       └────────────────────────────────────────────────────┘
+                     피드백 주입 후 재생성 (최대 N회)
+```
 
-### 파이프라인 모니터링
-<!-- gcpipe pipeline status 실행 결과 GIF -->
-`[screenshots/pipeline_status.gif]`
+```python
+# 사용 예시
+from src.pipeline.regenerator import ContentRegenerator
+from src.generators import ItemGenerator
+from src.validators.balance import BalanceValidator
 
-### Streamlit 리뷰 대시보드
-<!-- 대시보드 콘텐츠 리뷰 화면 스크린샷 -->
-`[screenshots/dashboard_review.png]`
+generator = ItemGenerator()
+balance_validator = BalanceValidator()
 
-### 밸런스 차트
-<!-- 기존 vs 신규 아이템 스탯 분포 차트 -->
-`[screenshots/balance_chart.png]`
+regenerator = ContentRegenerator(
+    generator=generator,
+    validators=[lambda items: balance_validator.check_stat_range(items[0], seed_items)],
+    max_attempts=3,
+)
+
+result = regenerator.run(type="weapon", rarity="epic", count=3)
+# result.succeeded: True/False
+# result.attempts: 실제 시도 횟수
+# result.validation_history: 라운드별 검증 결과
+```
+
+---
+
+## 대시보드 주요 화면
+
+### Overview — 콘텐츠 현황
+- 총 콘텐츠 수, 파이프라인 실행 수, 승인 현황 메트릭
+- 타입×상태별 피벗 테이블 + 바 차트
+
+### Content Review — 리뷰/승인 워크플로우
+- Content Data / Validation / Actions 3탭 구조
+- 검증 결과를 severity별 아이콘(✅/⚠️/❌)으로 시각화
+- Approve / Reject / **Regenerate** 버튼으로 즉시 액션
+
+### Version History — 버전 비교
+- 콘텐츠별 전체 버전 히스토리 조회
+- 버전 간 diff 비교 (변경된 필드 하이라이트)
+
+### Balance Chart — 밸런스 분석
+- 스탯별 평균/표준편차 메트릭
+- 아이템별 스탯 바 차트
+- 레벨 vs 총 스탯 성장 곡선
+
+### Pipeline Runs — 실행 히스토리
+- 파이프라인 실행 목록 (상태, 소요 시간)
+- 스텝별 성공/실패 상세 표시
 
 ---
 

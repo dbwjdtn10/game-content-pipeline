@@ -57,6 +57,7 @@ class ItemGenerator(BaseGenerator):
         count: int = 3,
         theme: str = "",
         level_range: tuple[int, int] = (1, 99),
+        _feedback: str = "",
     ) -> list[GeneratedItem]:
         """Generate *count* items matching the given parameters."""
         self.log.info(
@@ -66,6 +67,7 @@ class ItemGenerator(BaseGenerator):
             count=count,
             theme=theme,
             level_range=level_range,
+            has_feedback=bool(_feedback),
         )
         prompt = self._build_prompt(
             type=type,
@@ -74,6 +76,7 @@ class ItemGenerator(BaseGenerator):
             theme=theme,
             level_range=level_range,
         )
+        prompt = self._append_feedback(prompt, _feedback)
         raw = self._call_llm(prompt, response_schema=list[GeneratedItem])
         items = self._parse_response(raw)
         self.log.info("item_generate_done", generated=len(items))

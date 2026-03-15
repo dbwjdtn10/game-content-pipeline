@@ -64,6 +64,7 @@ class QuestGenerator(BaseGenerator):
         count: int = 1,
         min_steps: int = 2,
         max_steps: int = 5,
+        _feedback: str = "",
     ) -> list[GeneratedQuest]:
         """Generate *count* quests matching the given parameters."""
         self.log.info(
@@ -74,6 +75,7 @@ class QuestGenerator(BaseGenerator):
             count=count,
             min_steps=min_steps,
             max_steps=max_steps,
+            has_feedback=bool(_feedback),
         )
         prompt = self._build_prompt(
             type=type,
@@ -83,6 +85,7 @@ class QuestGenerator(BaseGenerator):
             min_steps=min_steps,
             max_steps=max_steps,
         )
+        prompt = self._append_feedback(prompt, _feedback)
         raw = self._call_llm(prompt, response_schema=list[GeneratedQuest])
         quests = self._parse_response(raw)
         self.log.info("quest_generate_done", generated=len(quests))

@@ -131,41 +131,76 @@ class BaseGenerator(abc.ABC):
         raise RuntimeError("Exhausted retries without raising.")  # pragma: no cover
 
     # ------------------------------------------------------------------
-    # Seed / reference data helpers
+    # Feedback support for regeneration loop
     # ------------------------------------------------------------------
 
-    @staticmethod
-    def load_seed(filename: str) -> list[dict[str, Any]]:
-        """Load a JSON seed file from ``game_data/seed/``."""
+    def _append_feedback(self, prompt: str, feedback: str) -> str:
+        """Append corrective feedback to the prompt for regeneration."""
+        if not feedback:
+            return prompt
+        return (
+            f"{prompt}\n\n"
+            "--- IMPORTANT: CORRECTIVE FEEDBACK FROM PREVIOUS ATTEMPT ---\n"
+            f"{feedback}\n"
+            "--- END FEEDBACK ---\n"
+        )
+
+    # ------------------------------------------------------------------
+    # Seed / reference data helpers (cached)
+    # ------------------------------------------------------------------
+
+    _seed_cache: dict[str, list[dict[str, Any]]] = {}
+    _world_setting_cache: str | None = None
+    _prompt_template_cache: dict[str, str] = {}
+
+    @classmethod
+    def load_seed(cls, filename: str) -> list[dict[str, Any]]:
+        """Load a JSON seed file from ``game_data/seed/`` (cached)."""
+        if filename in cls._seed_cache:
+            return cls._seed_cache[filename]
         path = SEED_DIR / filename
         if not path.exists():
             logger.warning("seed_file_not_found", path=str(path))
             return []
         with path.open("r", encoding="utf-8") as fh:
             data = json.load(fh)
-        if isinstance(data, list):
-            return data
-        return [data]
+        result = data if isinstance(data, list) else [data]
+        cls._seed_cache[filename] = result
+        return result
 
-    @staticmethod
-    def load_world_setting() -> str:
-        """Load the world-setting markdown for tone/lore reference."""
+    @classmethod
+    def load_world_setting(cls) -> str:
+        """Load the world-setting markdown for tone/lore reference (cached)."""
+        if cls._world_setting_cache is not None:
+            return cls._world_setting_cache
         if not WORLD_SETTING_PATH.exists():
             logger.warning("world_setting_not_found", path=str(WORLD_SETTING_PATH))
             return ""
-        return WORLD_SETTING_PATH.read_text(encoding="utf-8")
+        cls._world_setting_cache = WORLD_SETTING_PATH.read_text(encoding="utf-8")
+        return cls._world_setting_cache
 
-    @staticmethod
-    def load_prompt_template(name: str) -> str:
-        """Load a prompt template from the prompts directory.
+    @classmethod
+    def load_prompt_template(cls, name: str) -> str:
+        """Load a prompt template from the prompts directory (cached).
 
         Looks in ``prompts/v1/<name>.txt`` by default.
         """
+        if name in cls._prompt_template_cache:
+            return cls._prompt_template_cache[name]
         path = PROMPTS_DIR / "v1" / f"{name}.txt"
         if not path.exists():
             logger.warning("prompt_template_not_found", path=str(path))
             return ""
-        return path.read_text(encoding="utf-8")
+        result = path.read_text(encoding="utf-8")
+        cls._prompt_template_cache[name] = result
+        return result
+
+    @classmethod
+    def clear_cache(cls) -> None:
+        """Clear all cached seed data, world settings, and prompt templates."""
+        cls._seed_cache.clear()
+        cls._world_setting_cache = None
+        cls._prompt_template_cache.clear()
 
     # ------------------------------------------------------------------
     # Convenience

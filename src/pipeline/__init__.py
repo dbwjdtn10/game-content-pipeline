@@ -2,6 +2,7 @@
 
 from src.pipeline.hooks import HookRegistry, PipelineHooks
 from src.pipeline.orchestrator import PipelineOrchestrator, PipelineResult
+from src.pipeline.regenerator import ContentRegenerator, RegenerationResult
 from src.pipeline.tasks import (
     celery_app,
     export_content_task,
@@ -12,6 +13,8 @@ from src.pipeline.tasks import (
 __all__ = [
     "PipelineOrchestrator",
     "PipelineResult",
+    "ContentRegenerator",
+    "RegenerationResult",
     "HookRegistry",
     "PipelineHooks",
     "celery_app",

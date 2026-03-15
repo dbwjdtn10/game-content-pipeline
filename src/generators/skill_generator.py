@@ -47,6 +47,7 @@ class SkillGenerator(BaseGenerator):
         element: str = "fire",
         count: int = 3,
         level_range: tuple[int, int] = (1, 99),
+        _feedback: str = "",
     ) -> list[GeneratedSkill]:
         """Generate *count* skills matching the given parameters."""
         self.log.info(
@@ -54,12 +55,14 @@ class SkillGenerator(BaseGenerator):
             element=element,
             count=count,
             level_range=level_range,
+            has_feedback=bool(_feedback),
         )
         prompt = self._build_prompt(
             element=element,
             count=count,
             level_range=level_range,
         )
+        prompt = self._append_feedback(prompt, _feedback)
         raw = self._call_llm(prompt, response_schema=list[GeneratedSkill])
         skills = self._parse_response(raw)
         self.log.info("skill_generate_done", generated=len(skills))

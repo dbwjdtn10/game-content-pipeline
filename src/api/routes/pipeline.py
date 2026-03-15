@@ -87,6 +87,17 @@ def run_pipeline(
     return PipelineRunCreatedOut(pipeline_id=run.id, status="pending")
 
 
+@router.get("/history", response_model=list[PipelineRunOut])
+def list_pipeline_runs(
+    repo: Annotated[PipelineRepository, Depends(_get_repo)],
+    limit: int = 50,
+    offset: int = 0,
+) -> list[PipelineRunOut]:
+    """List recent pipeline runs."""
+    runs = repo.list_runs(limit=limit, offset=offset)
+    return [PipelineRunOut.model_validate(r) for r in runs]
+
+
 @router.get("/{run_id}/status", response_model=PipelineRunOut)
 def get_pipeline_status(
     run_id: str,

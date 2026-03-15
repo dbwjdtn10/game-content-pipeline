@@ -75,7 +75,48 @@ def generate_content_task(
             }
 
         generator = generator_cls()
-        result = generator.generate(**params)
+
+        # Check if auto-regeneration is requested
+        max_regen = params.pop("max_regeneration_attempts", 0)
+
+        if max_regen > 0:
+            from src.pipeline.regenerator import ContentRegenerator
+            from src.validators.balance import BalanceValidator
+            from src.validators.schema_check import SchemaValidator
+            from pathlib import Path
+
+            validators_fns = []
+            schema_path = Path(__file__).resolve().parents[1] / "game_data" / "schema" / f"{content_type}_schema.json"
+
+            if schema_path.exists():
+                sv = SchemaValidator()
+                validators_fns.append(lambda content, _sv=sv, _sp=schema_path: _sv.validate(
+                    [c.model_dump(mode="json") if hasattr(c, "model_dump") else c for c in content]
+                    if isinstance(content, list) else content,
+                    _sp,
+                ))
+
+            if content_type == "item":
+                bv = BalanceValidator()
+                seed_items = generator.load_seed("items.json")
+                def _balance_check(content, _bv=bv, _seed=seed_items):
+                    results = []
+                    items = content if isinstance(content, list) else [content]
+                    for item in items:
+                        d = item.model_dump(mode="json") if hasattr(item, "model_dump") else item
+                        results.append(_bv.check_stat_range(d, _seed))
+                    return results
+                validators_fns.append(_balance_check)
+
+            regenerator = ContentRegenerator(
+                generator, validators_fns, max_attempts=max_regen,
+            )
+            regen_result = regenerator.run(**params)
+            result = regen_result.content
+            regen_meta = regen_result.to_dict()
+        else:
+            result = generator.generate(**params)
+            regen_meta = None
 
         # Convert result to JSON-serializable form
         if hasattr(result, "model_dump"):
@@ -88,7 +129,10 @@ def generate_content_task(
         elif not isinstance(result, dict):
             result = json.loads(json.dumps(result, default=str))
 
-        return {"status": "success", "content_type": content_type, "data": result}
+        response = {"status": "success", "content_type": content_type, "data": result}
+        if regen_meta:
+            response["regeneration"] = regen_meta
+        return response
 
     except Exception as exc:
         raise self.retry(exc=exc, countdown=2 ** self.request.retries)

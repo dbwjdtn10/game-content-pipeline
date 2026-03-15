@@ -45,6 +45,12 @@ class ReviewRequest(BaseModel):
     comment: str | None = None
 
 
+class RegenerateRequest(BaseModel):
+    """Request body to trigger content regeneration with feedback loop."""
+
+    max_attempts: int = Field(default=3, ge=1, le=5, description="Max regeneration attempts")
+
+
 # ------------------------------------------------------------------
 # Pipeline schemas
 # ------------------------------------------------------------------
