@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 
 from src.api.main import get_db
 from src.api.schemas import StatsOverviewOut, TypeStatusCount
-from src.storage.models import ContentVersion, PipelineRun
+from src.storage.models import PipelineRun
 from src.storage.repository import ContentRepository
 
 router = APIRouter()

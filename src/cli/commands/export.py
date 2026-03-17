@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 
@@ -26,11 +26,11 @@ def export(
         typer.Option("--format", "-f", help="출력 형식 (json, csv, markdown)"),
     ] = "json",
     template: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--template", "-t", help="Jinja2 템플릿 파일 경로 (markdown 형식에서 사용)"),
     ] = None,
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="출력 디렉터리 또는 파일 경로"),
     ] = None,
 ) -> None:

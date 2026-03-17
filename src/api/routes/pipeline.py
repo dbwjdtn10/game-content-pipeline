@@ -2,14 +2,18 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Any
+from typing import Annotated
 
 import yaml
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from src.api.main import get_db
-from src.api.schemas import PipelineRunCreatedOut, PipelineRunOut, PipelineRunRequest, PipelineStepOut
+from src.api.schemas import (
+    PipelineRunCreatedOut,
+    PipelineRunOut,
+    PipelineRunRequest,
+)
 from src.pipeline.orchestrator import PipelineOrchestrator
 from src.storage.repository import PipelineRepository
 

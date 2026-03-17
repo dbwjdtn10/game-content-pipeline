@@ -10,7 +10,7 @@ from typing import Any
 
 import structlog
 import yaml
-from celery import chain, group
+from celery import group
 
 from src.pipeline.hooks import HookRegistry, PipelineHooks
 from src.pipeline.tasks import (

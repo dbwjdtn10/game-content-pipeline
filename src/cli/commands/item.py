@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 
@@ -28,7 +28,7 @@ def generate(
         typer.Option("--count", "-c", help="생성할 아이템 수"),
     ] = 5,
     theme: Annotated[
-        Optional[str],
+        str | None,
         typer.Option("--theme", help="아이템 테마 (예: 화염, 얼음, 암흑)"),
     ] = None,
     level_range: Annotated[
@@ -36,7 +36,7 @@ def generate(
         typer.Option("--level-range", "-l", help="아이템 레벨 범위 (예: 50-60)"),
     ] = "1-10",
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="결과를 저장할 파일 경로"),
     ] = None,
 ) -> None:
@@ -108,6 +108,7 @@ def generate(
         try:
             from sqlalchemy import create_engine
             from sqlalchemy.orm import Session as SASession
+
             from src.config import get_settings
             from src.storage.repository import ContentRepository
 

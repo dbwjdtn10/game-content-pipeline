@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import traceback
 from typing import Any
 
 from celery import Celery
@@ -80,10 +79,11 @@ def generate_content_task(
         max_regen = params.pop("max_regeneration_attempts", 0)
 
         if max_regen > 0:
+            from pathlib import Path
+
             from src.pipeline.regenerator import ContentRegenerator
             from src.validators.balance import BalanceValidator
             from src.validators.schema_check import SchemaValidator
-            from pathlib import Path
 
             validators_fns = []
             schema_path = Path(__file__).resolve().parents[1] / "game_data" / "schema" / f"{content_type}_schema.json"

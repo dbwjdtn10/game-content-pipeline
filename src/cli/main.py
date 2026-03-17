@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 from rich.panel import Panel
@@ -60,7 +60,7 @@ app.add_typer(pipeline_app, name="pipeline", help="파이프라인 실행 및 �
 @pipeline_app.command("run")
 def pipeline_run(
     config: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--config", "-c", help="파이프라인 설정 파일 경로 (JSON)"),
     ] = None,
     content_type: Annotated[
@@ -76,11 +76,11 @@ def pipeline_run(
         typer.Option("--validate/--no-validate", help="생성 후 검증 실행 여부"),
     ] = True,
     export_format: Annotated[
-        Optional[str],
+        str | None,
         typer.Option("--export", "-e", help="내보내기 형식 (json, csv, markdown)"),
     ] = None,
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="결과 출력 디렉터리"),
     ] = None,
 ) -> None:
@@ -174,6 +174,7 @@ def pipeline_status() -> None:
     try:
         from sqlalchemy import create_engine
         from sqlalchemy.orm import Session as SASession
+
         from src.config import get_settings
         from src.storage.repository import PipelineRepository
 
@@ -211,7 +212,7 @@ app.add_typer(content_app, name="content", help="저장된 콘텐츠 조회 및 
 @content_app.command("list")
 def content_list(
     content_type: Annotated[
-        Optional[str],
+        str | None,
         typer.Option("--type", "-t", help="콘텐츠 유형 필터 (item, monster, quest)"),
     ] = None,
     limit: Annotated[
@@ -219,7 +220,7 @@ def content_list(
         typer.Option("--limit", "-n", help="표시할 최대 개수"),
     ] = 20,
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="결과를 저장할 파일 경로"),
     ] = None,
 ) -> None:
@@ -227,6 +228,7 @@ def content_list(
     try:
         from sqlalchemy import create_engine
         from sqlalchemy.orm import Session as SASession
+
         from src.config import get_settings
         from src.storage.repository import ContentRepository
 
@@ -289,6 +291,7 @@ def content_delete(
 
         from sqlalchemy import create_engine
         from sqlalchemy.orm import Session as SASession
+
         from src.config import get_settings
         from src.storage.repository import ContentRepository
 
@@ -321,6 +324,7 @@ def content_inspect(
     try:
         from sqlalchemy import create_engine
         from sqlalchemy.orm import Session as SASession
+
         from src.config import get_settings
         from src.storage.repository import ContentRepository
 
@@ -372,7 +376,7 @@ def _version_callback(value: bool) -> None:
 @app.callback()
 def main(
     version: Annotated[
-        Optional[bool],
+        bool | None,
         typer.Option("--version", "-v", help="버전 정보 표시", callback=_version_callback, is_eager=True),
     ] = None,
 ) -> None:

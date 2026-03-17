@@ -5,8 +5,8 @@ from src.storage.repository import ContentRepository, PipelineRepository
 
 __all__ = [
     "Base",
-    "ContentVersion",
-    "PipelineRun",
     "ContentRepository",
+    "ContentVersion",
     "PipelineRepository",
+    "PipelineRun",
 ]

@@ -1,0 +1,46 @@
+# Version control
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv
+venv
+env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing / Coverage
+.pytest_cache
+.mypy_cache
+.ruff_cache
+htmlcov/
+.coverage
+coverage.xml
+
+# Environment files (secrets)
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation artifacts
+*.md
+!README.md
+!game_data/seed/world_setting.md
+
+# CI
+.github/

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 
@@ -28,7 +28,7 @@ def generate(
         typer.Option("--format", "-f", help="출력 형식 (markdown, html, text)"),
     ] = "markdown",
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="결과를 저장할 파일 경로"),
     ] = None,
 ) -> None:

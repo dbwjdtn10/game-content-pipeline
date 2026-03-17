@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 
@@ -39,7 +39,7 @@ def validate(
         typer.Option("--check", "-c", help="실행할 검증 (쉼표 구분: consistency,balance,duplicate,schema)"),
     ] = "consistency,balance,duplicate",
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="검증 결과를 저장할 파일 경로"),
     ] = None,
 ) -> None:

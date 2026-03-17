@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 
@@ -38,7 +38,7 @@ def generate(
         typer.Option("--difficulty", "-d", help="난이도 (normal, elite, boss)"),
     ] = "normal",
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="결과를 저장할 파일 경로"),
     ] = None,
 ) -> None:
@@ -102,6 +102,7 @@ def generate(
         try:
             from sqlalchemy import create_engine
             from sqlalchemy.orm import Session as SASession
+
             from src.config import get_settings
             from src.storage.repository import ContentRepository
 
@@ -138,7 +139,7 @@ def balance(
         typer.Option("--difficulty", "-d", help="목표 난이도 (normal, elite, boss)"),
     ] = "normal",
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="밸런스 리포트 저장 경로"),
     ] = None,
 ) -> None:
@@ -188,7 +189,7 @@ def balance(
             output.parent.mkdir(parents=True, exist_ok=True)
             report_data = [s.model_dump() for s in results]
             if str(output).endswith(".md"):
-                lines = [f"# 몬스터 밸런스 리포트\n"]
+                lines = ["# 몬스터 밸런스 리포트\n"]
                 lines.append(f"- 소스: {source}")
                 lines.append(f"- 목표 레벨: {target_level}")
                 lines.append(f"- 난이도: {difficulty}\n")

@@ -7,8 +7,6 @@ from pathlib import Path
 from typing import Any
 
 import structlog
-from pydantic import BaseModel, ValidationError, create_model
-from pydantic.fields import FieldInfo
 
 from src.validators.models import ValidationResult
 

@@ -10,10 +10,8 @@ import csv
 import json
 from pathlib import Path
 from typing import Any
-from unittest.mock import MagicMock, patch
 
 import pytest
-
 
 # =========================================================================
 # 1. JsonExporter

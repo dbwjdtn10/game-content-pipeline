@@ -6,11 +6,13 @@
 
 게임 아이템, 몬스터, 퀘스트, 패치노트를 AI로 생성하고 자동 검증하는 End-to-End 워크플로우 엔진
 
+[![CI](https://github.com/dbwjdtn10/game-content-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/dbwjdtn10/game-content-pipeline/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Celery](https://img.shields.io/badge/Celery-Async_Pipeline-37814A?style=for-the-badge&logo=celery&logoColor=white)](https://docs.celeryq.dev)
 [![FastAPI](https://img.shields.io/badge/FastAPI-Dashboard_API-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Docker](https://img.shields.io/badge/Docker-One--Click_Deploy-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+[![Coverage](https://img.shields.io/badge/Coverage-53%25-yellow?style=for-the-badge)]()
 
 </div>
 
@@ -333,6 +335,10 @@ game-content-pipeline/
 | **통계 기반 밸런스 검증** | 기존 데이터의 레벨별/등급별 분포에서 평균 +/- 2 sigma 범위 검증 + 성장 곡선 회귀 모델 |
 | **프롬프트 버전 관리** | 프롬프트를 코드와 분리하여 버전 관리. A/B 벤치마크로 품질 비교 가능 |
 | **구조화 로깅 (structlog)** | LLM 호출별 토큰 수, 지연 시간, 비용, 캐시 적중률 추적 |
+| **API 미들웨어** | Request ID 추적, 응답 시간 측정, IP 기반 Rate Limiting, 구조화된 에러 응답 |
+| **CI/CD 파이프라인** | GitHub Actions: Lint(ruff) + Type Check(mypy) + Test(pytest-cov) + Docker Build 4단계 자동화 |
+| **API 버저닝** | `/api/v1` 접두어로 하위 호환성 유지 + 기존 경로 병행 지원 |
+| **프로덕션 Docker** | 멀티 스테이지 빌드, non-root 유저, HEALTHCHECK, 최소 런타임 이미지 |
 
 ---
 
@@ -404,6 +410,59 @@ result = regenerator.run(type="weapon", rarity="epic", count=3)
 ### Pipeline Runs — 실행 히스토리
 - 파이프라인 실행 목록 (상태, 소요 시간)
 - 스텝별 성공/실패 상세 표시
+
+---
+
+## 개발 환경 (Development)
+
+### 의존성 설치
+
+```bash
+# 프로덕션 의존성만
+pip install -e .
+
+# 개발 의존성 (lint, test, type-check) 포함
+pip install -e ".[dev]"
+```
+
+### Makefile 명령어
+
+```bash
+make help          # 사용 가능한 명령어 목록
+make lint          # ruff 린트 실행
+make format        # 코드 자동 포맷팅
+make type-check    # mypy 타입 체크
+make test          # pytest + 커버리지 실행
+make test-cov      # HTML 커버리지 리포트 생성
+make up            # Docker Compose 전체 서비스 시작
+make down          # 서비스 중지
+make clean         # 빌드 캐시 정리
+```
+
+### CI/CD
+
+GitHub Actions에서 PR/Push 시 자동 실행:
+1. **Lint** -- ruff (코드 스타일 + import 정렬)
+2. **Type Check** -- mypy (타입 안전성)
+3. **Test** -- pytest + coverage (Python 3.11, 3.12 매트릭스)
+4. **Docker Build** -- 이미지 빌드 및 import 검증
+
+### API 엔드포인트
+
+| Method | Path | 설명 |
+|:-------|:-----|:-----|
+| GET | `/health` | Liveness probe |
+| GET | `/health/ready` | Readiness probe (DB + Redis 연결 확인) |
+| GET | `/api/v1/content` | 콘텐츠 목록 (필터: type, status) |
+| GET | `/api/v1/content/{id}` | 콘텐츠 상세 |
+| POST | `/api/v1/content/{id}/approve` | 콘텐츠 승인 |
+| POST | `/api/v1/content/{id}/reject` | 콘텐츠 거절 |
+| POST | `/api/v1/content/{id}/regenerate` | 재생성 트리거 |
+| POST | `/api/v1/pipeline/run` | 파이프라인 실행 |
+| GET | `/api/v1/pipeline/history` | 실행 이력 |
+| GET | `/api/v1/stats/overview` | 통계 개요 |
+| GET | `/docs` | Swagger UI |
+| GET | `/redoc` | ReDoc |
 
 ---
 

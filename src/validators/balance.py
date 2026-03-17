@@ -7,7 +7,7 @@ from typing import Any
 import numpy as np
 import structlog
 
-from src.generators.item_generator import GeneratedItem, ItemStats
+from src.generators.item_generator import GeneratedItem
 from src.validators.models import ValidationResult
 
 logger = structlog.get_logger(__name__)
@@ -122,7 +122,7 @@ class BalanceValidator:
                 message="Common rarity; no lower tier to compare against.",
             )
 
-        lower_rarity = [r for r, v in RARITY_ORDER.items() if v == rarity_rank - 1][0]
+        lower_rarity = next(r for r, v in RARITY_ORDER.items() if v == rarity_rank - 1)
         level = item_d.get("level_requirement", 1)
         level_band = (max(1, level - 5), level + 5)
 

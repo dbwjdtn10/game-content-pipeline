@@ -106,7 +106,6 @@ def _regenerate_background(
     from src.generators import ItemGenerator, MonsterGenerator, QuestGenerator, SkillGenerator
     from src.pipeline.regenerator import ContentRegenerator
     from src.validators.balance import BalanceValidator
-    from src.validators.schema_check import SchemaValidator
 
     eng = create_engine(database_url, pool_pre_ping=True)
     with SASession(eng) as session:

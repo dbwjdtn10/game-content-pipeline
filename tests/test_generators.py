@@ -13,7 +13,6 @@ from unittest.mock import MagicMock, patch
 import pytest
 from pydantic import BaseModel, ValidationError
 
-
 # =========================================================================
 # Pydantic models (mirrors the project's expected GeneratedItem / etc.)
 # If the real models are importable, use them; otherwise these stand-alone
@@ -50,7 +49,7 @@ except ImportError:
 try:
     from src.generators.monster_generator import GeneratedMonster
 except ImportError:
-    from typing import Literal  # noqa: F811
+    from typing import Literal
 
     class MonsterStats(BaseModel):
         hp: int
@@ -82,7 +81,7 @@ except ImportError:
 try:
     from src.generators.quest_generator import GeneratedQuest
 except ImportError:
-    from typing import Literal  # noqa: F811
+    from typing import Literal
 
     class QuestStep(BaseModel):
         order: int

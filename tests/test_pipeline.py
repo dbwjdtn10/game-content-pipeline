@@ -13,7 +13,6 @@ from unittest.mock import MagicMock, patch
 import pytest
 import yaml
 
-
 # =========================================================================
 # Sample pipeline config
 # =========================================================================

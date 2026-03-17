@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 
@@ -20,11 +20,11 @@ def generate(
         typer.Option("--type", "-t", help="퀘스트 유형 (main, side, daily, event)"),
     ] = "side",
     region: Annotated[
-        Optional[str],
+        str | None,
         typer.Option("--region", "-r", help="퀘스트 지역 (예: 화산 지대)"),
     ] = None,
     npc: Annotated[
-        Optional[str],
+        str | None,
         typer.Option("--npc", help="퀘스트 NPC 이름 (예: 대장장이 가론)"),
     ] = None,
     count: Annotated[
@@ -40,7 +40,7 @@ def generate(
         typer.Option("--max-steps", help="퀘스트 최대 단계 수"),
     ] = 7,
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="결과를 저장할 파일 경로"),
     ] = None,
 ) -> None:
@@ -107,6 +107,7 @@ def generate(
         try:
             from sqlalchemy import create_engine
             from sqlalchemy.orm import Session as SASession
+
             from src.config import get_settings
             from src.storage.repository import ContentRepository
 

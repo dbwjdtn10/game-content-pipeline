@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
-from typing import Any, Sequence
+from collections.abc import Sequence
+from datetime import UTC, datetime
+from typing import Any
 
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
@@ -188,7 +189,7 @@ class PipelineRepository:
             name=name,
             config=config,
             status="pending",
-            started_at=datetime.now(timezone.utc),
+            started_at=datetime.now(UTC),
         )
         self.session.add(run)
         self.session.flush()
@@ -207,7 +208,7 @@ class PipelineRepository:
         if result is not None:
             run.result = result
         if status in ("completed", "failed"):
-            run.completed_at = datetime.now(timezone.utc)
+            run.completed_at = datetime.now(UTC)
         self.session.flush()
         return run
 
